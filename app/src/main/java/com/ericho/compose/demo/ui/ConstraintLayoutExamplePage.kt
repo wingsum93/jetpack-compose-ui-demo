@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.ericho.compose.demo.base.StandardButton
@@ -29,4 +30,10 @@ fun ConstraintLayoutExamplePage() {
             start.linkTo(b2.end, 10.dp)
         })
     }
+}
+
+@Preview
+@Composable
+fun PreviewConstraintLayoutPage() {
+    ConstraintLayoutExamplePage()
 }

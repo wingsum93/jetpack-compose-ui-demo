@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ericho.compose.demo.ui.BasicAnimationPage
 import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 
@@ -31,6 +32,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Route.CONSTRAINT_LAYOUT) {
                             ConstraintLayoutExamplePage()
+                        }
+                        composable(Route.BASIC_ANIMATION) {
+                            BasicAnimationPage()
                         }
                     }
                 }

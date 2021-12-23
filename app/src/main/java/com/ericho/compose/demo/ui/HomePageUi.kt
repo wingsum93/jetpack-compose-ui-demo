@@ -15,7 +15,7 @@ import com.ericho.compose.demo.base.StandardButton
 val data = hashMapOf<String, String>(
     "Constraint Layout" to Route.CONSTRAINT_LAYOUT,
     "Animation Color" to Route.ANIMATION_COLOR,
-    "Basic animation" to Route.BASIC_ANIMATION
+    "Basic animation (Animation Visibility)" to Route.BASIC_ANIMATION
 )
 
 @Composable
