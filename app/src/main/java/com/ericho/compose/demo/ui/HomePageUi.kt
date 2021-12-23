@@ -16,7 +16,7 @@ val data = hashMapOf<String, String>(
     "Constraint Layout" to Route.CONSTRAINT_LAYOUT,
     "Animation Color" to Route.ANIMATION_COLOR,
     "Basic animation (Animation Visibility)" to Route.BASIC_ANIMATION_VISIBILITY,
-    "Basic animation (Animation Content)" to Route.BASIC_ANIMATION_VISIBILITY
+    "Basic animation (Animation Content)" to Route.BASIC_ANIMATION_CONTENT
 )
 
 @Composable
