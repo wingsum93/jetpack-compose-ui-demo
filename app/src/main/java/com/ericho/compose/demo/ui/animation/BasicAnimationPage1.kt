@@ -11,13 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.ericho.compose.demo.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun BasicAnimationPage() {
+fun BasicAnimationPage1() {
     var showImage by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     ConstraintLayout(
@@ -29,8 +30,12 @@ fun BasicAnimationPage() {
         val painter = painterResource(id = R.drawable.ic_rick_and_morty_1)
         AnimatedVisibility(
             visible = showImage,
-            enter = fadeIn() + expandIn(expandFrom = Alignment.Center),
-            exit = fadeOut() + shrinkOut(shrinkTowards = Alignment.Center),
+            enter = fadeIn() + expandIn(
+                expandFrom = Alignment.Center,
+                initialSize = { IntSize(50, 50) }),
+            exit = fadeOut() + shrinkOut(
+                shrinkTowards = Alignment.Center,
+                targetSize = { IntSize(50, 50) }),
             modifier = Modifier.constrainAs(image) {
                 centerHorizontallyTo(b)
                 bottom.linkTo(b.top, 10.dp)
@@ -59,6 +64,6 @@ fun BasicAnimationPage() {
 
 @Preview
 @Composable
-fun PreviewBasicAnimationPage() {
-    BasicAnimationPage()
+fun PreviewBasicAnimationPage1() {
+    BasicAnimationPage1()
 }
