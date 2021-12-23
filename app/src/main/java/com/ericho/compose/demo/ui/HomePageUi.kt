@@ -12,7 +12,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ericho.compose.demo.base.StandardButton
 
-val data = listOf("Stack Layout", "Animation Color", "Other animation")
+val data = hashMapOf<String, String>(
+    "Stack Layout" to Route.STACK_LAYOUT,
+    "Animation Color" to Route.ANIMATION_COLOR,
+    "Basic animation" to Route.BASIC_ANIMATION
+)
 
 @Composable
 fun HomePageUi(
@@ -22,7 +26,9 @@ fun HomePageUi(
         modifier = Modifier.padding(8.dp)
     ) {
         for (i in data) {
-            StandardButton(text = i)
+            StandardButton(text = i.key) {
+                navHostController.navigate(i.value)
+            }
             Spacer(modifier = Modifier.height(12.dp))
         }
     }
