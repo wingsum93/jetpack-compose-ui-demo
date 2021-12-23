@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ericho.compose.demo.ui.StickLayoutExamplePage
+import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
                         composable(Route.HOME) {
                             HomePageUi(navController)
                         }
-                        composable(Route.STACK_LAYOUT) {
-                            StickLayoutExamplePage()
+                        composable(Route.CONSTRAINT_LAYOUT) {
+                            ConstraintLayoutExamplePage()
                         }
                     }
                 }

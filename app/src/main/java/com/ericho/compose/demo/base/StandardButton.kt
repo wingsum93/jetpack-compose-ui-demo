@@ -23,7 +23,7 @@ fun StandardButton(
     TextButton(
         onClick = onClick,
         modifier = modifier
-            .border(2.dp, borderColor, RoundedCornerShape(20.dp))
+            .border(2.dp, borderColor, RoundedCornerShape(5.dp))
     ) {
         Text(text = text)
     }

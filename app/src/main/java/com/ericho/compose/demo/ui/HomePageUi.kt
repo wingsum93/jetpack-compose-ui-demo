@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ericho.compose.demo.base.StandardButton
 
 val data = hashMapOf<String, String>(
-    "Stack Layout" to Route.STACK_LAYOUT,
+    "Constraint Layout" to Route.CONSTRAINT_LAYOUT,
     "Animation Color" to Route.ANIMATION_COLOR,
     "Basic animation" to Route.BASIC_ANIMATION
 )
