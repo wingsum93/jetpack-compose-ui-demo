@@ -26,7 +26,7 @@ fun BasicAnimationPage1() {
             .fillMaxHeight()
             .fillMaxWidth()
     ) {
-        val (image, b) = createRefs()
+        val (image, b, text) = createRefs()
         val painter = painterResource(id = R.drawable.ic_rick_and_morty_1)
         AnimatedVisibility(
             visible = showImage,
@@ -59,6 +59,13 @@ fun BasicAnimationPage1() {
         ) {
             Text(text = "Click to switch !")
         }
+        Text(
+            text = "AnimatedVisibility: fadeIn + expandIn, fadeOut + shrinkOut",
+            modifier = Modifier.constrainAs(text) {
+                top.linkTo(parent.top)
+                centerHorizontallyTo(parent)
+            }
+        )
     }
 }
 
