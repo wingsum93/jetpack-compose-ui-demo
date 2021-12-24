@@ -1,6 +1,7 @@
 package com.ericho.compose.demo.ui.animation
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,7 +18,11 @@ import androidx.compose.ui.unit.sp
 @ExperimentalAnimationApi
 @Composable
 fun BasicAnimationPage2() {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
         Text(text = "slideInVertically + fadeIn, slideOutVertically + fadeOut")
         Spacer(modifier = Modifier.height(10.dp))
         Row {
@@ -60,6 +65,50 @@ fun BasicAnimationPage2() {
                     fontSize = 24.sp,
                     modifier = Modifier
                         .border(1.dp, Color.Blue, RoundedCornerShape(2.dp))
+                        .padding(8.dp)
+                )
+            }
+        }
+
+        Text(text = "? + fadeIn, slideOutVertically + fadeOut")
+        Spacer(modifier = Modifier.height(10.dp))
+        Row {
+            var count by remember { mutableStateOf(0) }
+            Button(onClick = {
+                count++
+            }) {
+                Text("Add")
+            }
+            Button(onClick = {
+                count--
+            }) {
+                Text("Remove")
+            }
+            Spacer(Modifier.width(100.dp))
+            AnimatedContent(
+                targetState = count,
+                modifier = Modifier,
+                transitionSpec = {
+                    // Compare the incoming number with the previous number.
+                    if (targetState > initialState) {
+                        fadeIn(tween(300)) + slideInHorizontally(tween(300)) { height -> height } with
+                                fadeOut(tween(300)) + slideOutHorizontally(tween(300)) { height -> -height }
+                    } else {
+                        fadeIn(tween(300)) + slideInHorizontally(tween(300)) { height -> -height } with
+                                fadeOut(tween(300)) + slideOutHorizontally(tween(300)) { height -> height }
+                    }.using(
+                        // Disable clipping since the faded slide-in/out should
+                        // be displayed out of bounds.
+                        SizeTransform(clip = false)
+                    )
+                }
+            ) { targetCount ->
+                Text(
+                    text = "$targetCount",
+                    textAlign = TextAlign.Center,
+                    fontSize = 24.sp,
+                    modifier = Modifier
+//                        .border(1.dp, Color.Blue, RoundedCornerShape(2.dp))
                         .padding(8.dp)
                 )
             }
