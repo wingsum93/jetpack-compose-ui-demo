@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -15,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
 fun BasicAnimationPage2() {
@@ -108,7 +110,6 @@ fun BasicAnimationPage2() {
                     textAlign = TextAlign.Center,
                     fontSize = 24.sp,
                     modifier = Modifier
-//                        .border(1.dp, Color.Blue, RoundedCornerShape(2.dp))
                         .padding(8.dp)
                 )
             }
@@ -116,6 +117,7 @@ fun BasicAnimationPage2() {
     }
 }
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
