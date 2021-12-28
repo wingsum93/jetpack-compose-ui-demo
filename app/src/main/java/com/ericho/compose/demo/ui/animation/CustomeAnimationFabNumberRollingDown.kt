@@ -2,8 +2,6 @@ package com.ericho.compose.demo.ui.animation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -16,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.sp
 import com.ericho.compose.demo.R
 import com.ericho.compose.demo.base.FloatingActionButton
@@ -46,12 +43,7 @@ fun CustomAnimationFabNumberRollingDown() {
 
     }) {
         Column(
-            modifier = Modifier.padding(
-                it.calculateStartPadding(LayoutDirection.Ltr),
-                it.calculateTopPadding(),
-                it.calculateEndPadding(LayoutDirection.Ltr),
-                it.calculateBottomPadding()
-            )
+            modifier = Modifier.padding(it)
         ) {
             Button(onClick = { num = 2000 }) {
                 Text(text = "2000")
@@ -76,7 +68,6 @@ fun CustomAnimationFabNumberRollingDown() {
             Button(onClick = { num = 999 }) {
                 Text(text = "999")
             }
-
         }
     }
 }
