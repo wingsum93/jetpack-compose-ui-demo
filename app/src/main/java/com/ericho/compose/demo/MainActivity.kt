@@ -13,11 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ericho.compose.demo.ui.BasicAnimationVisibilityPage
 import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
+import com.ericho.compose.demo.ui.HomePageUi
 import com.ericho.compose.demo.ui.animation.AnimationCrossFadePage
 import com.ericho.compose.demo.ui.animation.BasicAnimationContentPage
 import com.ericho.compose.demo.ui.animation.BasicAnimationContentPage2
+import com.ericho.compose.demo.ui.animation.BasicAnimationVisibilityPage
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 
 @ExperimentalMaterialApi

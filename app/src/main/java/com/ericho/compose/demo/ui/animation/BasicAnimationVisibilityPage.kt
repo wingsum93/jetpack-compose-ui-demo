@@ -1,4 +1,4 @@
-package com.ericho.compose.demo.ui
+package com.ericho.compose.demo.ui.animation
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.Image
@@ -71,6 +71,6 @@ fun BasicAnimationVisibilityPage() {
 
 @Preview
 @Composable
-fun PreviewBasicAnimationPage1() {
+fun PreviewBasicAnimationVisibilityPage() {
     BasicAnimationVisibilityPage()
 }

@@ -78,6 +78,6 @@ fun BasicAnimationContentPage2() {
 @ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
-fun PreviewBasicAnimationPage3() {
+fun PreviewBasicAnimationContentPage2() {
     BasicAnimationContentPage2()
 }
