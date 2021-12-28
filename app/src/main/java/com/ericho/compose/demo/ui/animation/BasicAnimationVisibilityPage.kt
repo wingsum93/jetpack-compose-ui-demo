@@ -18,7 +18,7 @@ import com.ericho.compose.demo.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun BasicAnimationPage1() {
+fun BasicAnimationVisibilityPage() {
     var showImage by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     ConstraintLayout(
@@ -72,5 +72,5 @@ fun BasicAnimationPage1() {
 @Preview
 @Composable
 fun PreviewBasicAnimationPage1() {
-    BasicAnimationPage1()
+    BasicAnimationVisibilityPage()
 }

@@ -18,7 +18,7 @@ import com.ericho.compose.demo.R
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
-fun BasicAnimationPage3() {
+fun BasicAnimationContentPage2() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -79,5 +79,5 @@ fun BasicAnimationPage3() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewBasicAnimationPage3() {
-    BasicAnimationPage3()
+    BasicAnimationContentPage2()
 }

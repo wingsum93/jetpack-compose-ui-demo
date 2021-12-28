@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
-fun BasicAnimationPage2() {
+fun BasicAnimationContentPage() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -122,5 +122,5 @@ fun BasicAnimationPage2() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewBasicAnimationPage2() {
-    BasicAnimationPage2()
+    BasicAnimationContentPage()
 }

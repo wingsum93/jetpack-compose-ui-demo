@@ -17,7 +17,8 @@ val data = hashMapOf<String, String>(
     "Animation Color" to Route.ANIMATION_COLOR,
     "Basic animation (Animation Visibility)" to Route.BASIC_ANIMATION_VISIBILITY,
     "Basic animation (Animation Content)" to Route.BASIC_ANIMATION_CONTENT,
-    "Basic animation (Animation Content2)" to Route.BASIC_ANIMATION_CONTENT2
+    "Basic animation (Animation Content2)" to Route.BASIC_ANIMATION_CONTENT2,
+    "Basic animation (Cross Fade)" to Route.BASIC_ANIMATION_CROSS_FADE
 )
 
 @Composable
