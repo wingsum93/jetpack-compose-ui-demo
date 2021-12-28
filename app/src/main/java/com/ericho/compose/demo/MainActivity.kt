@@ -15,10 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.HomePageUi
-import com.ericho.compose.demo.ui.animation.AnimationCrossFadePage
-import com.ericho.compose.demo.ui.animation.BasicAnimationContentPage
-import com.ericho.compose.demo.ui.animation.BasicAnimationContentPage2
-import com.ericho.compose.demo.ui.animation.BasicAnimationVisibilityPage
+import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 
 @ExperimentalMaterialApi
@@ -52,6 +49,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Route.BASIC_ANIMATION_CROSS_FADE) {
                             AnimationCrossFadePage()
+                        }
+                        composable(Route.CUSTOM_ANIMATION_1) {
+                            CustomAnimationFabNumberRollingDown()
                         }
                     }
                 }
