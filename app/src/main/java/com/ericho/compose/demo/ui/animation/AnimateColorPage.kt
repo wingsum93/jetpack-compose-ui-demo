@@ -4,7 +4,9 @@ import androidx.compose.animation.Animatable
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -20,10 +22,12 @@ import androidx.compose.foundation.layout.*
 
 @Composable
 fun AnimateColorPage() {
+    val scrollState = rememberScrollState()
     Column(
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .verticalScroll(scrollState)
     ) {
         Text(text = "Animate to some color (initial value = current value)")
         var color1 by remember { mutableStateOf(Color.Blue) }
@@ -184,6 +188,91 @@ fun AnimateColorPage() {
                 Text(text = "Fourth")
             }
             Button(onClick = { colorState = BoxState.Fifth }) {
+                Text(text = "fifth")
+            }
+        }
+        //Part 4
+        Text(text = "updateTransition (in series)")
+        var colorState2: BoxState by remember {
+            mutableStateOf(BoxState.First)
+        }
+        val colorTransition2 = updateTransition(targetState = colorState2, label = "transition")
+        val intermediateColor4 by colorTransition2.animateColor(
+            transitionSpec = { tween(3000, 0) },
+            label = "animateColor"
+        ) {
+            when (it) {
+                BoxState.First -> Color.Blue
+                BoxState.Second -> Color.Magenta
+                BoxState.Third -> Color.Yellow
+                BoxState.Fourth -> Color.Red
+                BoxState.Fifth -> Color.Green
+            }
+        }
+        val cornerRadius2 by colorTransition2.animateDp(
+            transitionSpec = { tween(3000, 3000) },
+            label = "cornerRadius2"
+        ) {
+            when (it) {
+                BoxState.First -> 5.dp
+                BoxState.Second -> 10.dp
+                BoxState.Third -> 15.dp
+                BoxState.Fourth -> 20.dp
+                BoxState.Fifth -> 25.dp
+            }
+        }
+        val colorSurfaceSize2 by colorTransition2.animateIntSize(
+            transitionSpec = { tween(3000, 6000) },
+            label = "colorSurfaceSize2"
+        ) {
+            when (it) {
+                BoxState.First -> IntSize(60, 60)
+                BoxState.Second -> IntSize(70, 70)
+                BoxState.Third -> IntSize(80, 80)
+                BoxState.Fourth -> IntSize(60, 100)
+                BoxState.Fifth -> IntSize(100, 60)
+            }
+        }
+        val colorOffset2 by colorTransition2.animateIntOffset(
+            transitionSpec = { tween(3000, 9000) },
+            label = "colorOffset2"
+        ) {
+            when (it) {
+                BoxState.First -> IntOffset(-160, 0)
+                BoxState.Second -> IntOffset(-100, 20)
+                BoxState.Third -> IntOffset(-50, -40)
+                BoxState.Fourth -> IntOffset(60, 60)
+                BoxState.Fifth -> IntOffset(100, -60)
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
+        ) {
+            Surface(
+                color = intermediateColor4, shape = RoundedCornerShape(cornerRadius2),
+                modifier = Modifier
+                    .size(colorSurfaceSize2.width.dp, colorSurfaceSize2.height.dp)
+                    .align(Alignment.Center)
+                    .offset(colorOffset2.x.dp, colorOffset2.y.dp)
+            ) {
+            }
+        }
+        Row() {
+            Button(onClick = { colorState2 = BoxState.First }) {
+                Text(text = "First")
+            }
+            Button(onClick = { colorState2 = BoxState.Second }) {
+                Text(text = "Second")
+            }
+            Button(onClick = { colorState2 = BoxState.Third }) {
+                Text(text = "Third")
+            }
+            Button(onClick = { colorState2 = BoxState.Fourth }) {
+                Text(text = "Fourth")
+            }
+            Button(onClick = { colorState2 = BoxState.Fifth }) {
                 Text(text = "fifth")
             }
         }
