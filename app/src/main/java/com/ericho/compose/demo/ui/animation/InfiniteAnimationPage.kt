@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
 
 @Composable
-fun AnimateColorPage2() {
+fun InfiniteAnimationPage() {
     val scrollState = rememberScrollState()
     Column(
         Modifier
@@ -83,8 +83,8 @@ fun AnimateColorPage2() {
 
 }
 
-@Preview("AnimateColorPage2")
+@Preview("InfiniteAnimationPage")
 @Composable
-fun AnimateColorPage2Preview() {
-    AnimateColorPage2()
+fun InfiniteAnimationPagePreview() {
+    InfiniteAnimationPage()
 }

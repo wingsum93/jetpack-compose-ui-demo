@@ -59,6 +59,9 @@ class MainActivity : ComponentActivity() {
                         composable(Route.ANIMATION_COLOR) {
                             AnimateColorPage()
                         }
+                        composable(Route.INFINITE_ANIMATION) {
+                            InfiniteAnimationPage()
+                        }
                     }
                 }
             }

@@ -21,6 +21,7 @@ val data = listOf<Pair<String, String>>(
     "Basic animation (Animation Content2)" to Route.BASIC_ANIMATION_CONTENT2,
     "Basic animation (Cross Fade)" to Route.BASIC_ANIMATION_CROSS_FADE,
     "Low Level animation (animate*AsState)" to Route.LOW_LEVEL_ANIMATION_API_1,
+    "Infinite Animation" to Route.INFINITE_ANIMATION,
     "Custom animation (Fab with rolling down number) IP" to Route.CUSTOM_ANIMATION_1
 )
 
