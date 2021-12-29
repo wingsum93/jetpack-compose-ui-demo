@@ -56,6 +56,9 @@ class MainActivity : ComponentActivity() {
                         composable(Route.LOW_LEVEL_ANIMATION_API_1) {
                             LowLevelAnimationApiPage()
                         }
+                        composable(Route.ANIMATION_COLOR) {
+                            AnimateColorPage()
+                        }
                     }
                 }
             }
