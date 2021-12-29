@@ -53,6 +53,9 @@ class MainActivity : ComponentActivity() {
                         composable(Route.CUSTOM_ANIMATION_1) {
                             CustomAnimationFabNumberRollingDown()
                         }
+                        composable(Route.LOW_LEVEL_ANIMATION_API_1) {
+                            LowLevelAnimationApiPage()
+                        }
                     }
                 }
             }
