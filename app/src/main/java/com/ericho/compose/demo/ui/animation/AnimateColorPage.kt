@@ -59,7 +59,7 @@ fun AnimateColorPage() {
         }
         Spacer(modifier = Modifier.height(40.dp))
         //Part 2
-        Text(text = "Animate to some color (initial value = current value)")
+        Text(text = "Animate to some color (initial value = fixed white)")
         var color2Int by remember {
             mutableStateOf(0)
         }
@@ -103,7 +103,7 @@ fun AnimateColorPage() {
         }
         Spacer(modifier = Modifier.height(40.dp))
         //Part 3
-        Text(text = "Animate to some color (updateTransition)")
+        Text(text = "updateTransition (in parallel)")
         var colorState: BoxState by remember {
             mutableStateOf(BoxState.First)
         }
@@ -149,11 +149,11 @@ fun AnimateColorPage() {
             label = "colorOffset"
         ) {
             when (it) {
-                BoxState.First -> IntOffset(-200, 0)
+                BoxState.First -> IntOffset(-160, 0)
                 BoxState.Second -> IntOffset(-100, 20)
-                BoxState.Third -> IntOffset(-50, 40)
+                BoxState.Third -> IntOffset(-50, -40)
                 BoxState.Fourth -> IntOffset(60, 60)
-                BoxState.Fifth -> IntOffset(100, 20)
+                BoxState.Fifth -> IntOffset(100, -60)
             }
         }
         Box(
