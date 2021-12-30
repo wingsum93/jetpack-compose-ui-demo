@@ -9,3 +9,7 @@
 [Appbar design recommend spec.](https://material.io/components/app-bars-top)
 
 [Low level detail gesture api doc](https://programs.wiki/wiki/using-jetpack-compose-to-complete-custom-gesture-processing.html)
+
+### Compose article
+
+[Swipe to reveal in Jetpack Compose](https://proandroiddev.com/swipe-to-reveal-in-jetpack-compose-6ffa8928a4c2)
