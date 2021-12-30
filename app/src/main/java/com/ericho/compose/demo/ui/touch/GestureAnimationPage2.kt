@@ -1,17 +1,22 @@
 package com.ericho.compose.demo.ui.touch
 
+import android.util.Log
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.splineBasedDecay
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.horizontalDrag
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.input.pointer.pointerInput
@@ -19,30 +24,47 @@ import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.*
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @ExperimentalGraphicsApi
 @Composable
 fun GestureAnimationPage2() {
-    val circleColor = Color.hsl(200f, 0.5f, 0.5f)
-    val offset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .swipeToDismiss {
-
-            }
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        scaffoldState = scaffoldState
     ) {
-        Circle(modifier = Modifier
-            .align(Alignment.Center)
-            .offset { offset.value.toIntOffset() }, color = circleColor
-        )
+        val circleColor = Color.hsl(200f, 0.5f, 0.5f)
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize()
+                .swipeToDismiss {
+                    scope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar("item is removed", "restored")
+                        Log.w("1999", "swipeToDismiss !!!!")
+                    }
+                },
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .height(120.dp)
+                    .background(circleColor, RoundedCornerShape(20.dp))
+            ) {
+                Text(
+                    text = "A", modifier = Modifier.align(Alignment.Center),
+                    color = Color.White
+                )
+            }
+        }
     }
 
 }
@@ -95,6 +117,7 @@ fun Modifier.swipeToDismiss(
                     upperBound = size.width.toFloat()
                 )
                 launch {
+                    Log.i("1999", "absoluteValue= ${targetOffsetX.absoluteValue}, ${size.width} ")
                     if (targetOffsetX.absoluteValue <= size.width) {
                         // Not enough velocity; Slide back.
                         offsetX.animateTo(
@@ -104,6 +127,7 @@ fun Modifier.swipeToDismiss(
                     } else {
                         // The element was swiped away.
                         offsetX.animateDecay(velocity, decay)
+                        Log.i("1999", "dismiss invoke")
                         onDismissed()
                     }
                 }
