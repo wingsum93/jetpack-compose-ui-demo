@@ -8,3 +8,4 @@
 
 [Appbar design recommend spec.](https://material.io/components/app-bars-top)
 
+[Low level detail gesture api doc](https://programs.wiki/wiki/using-jetpack-compose-to-complete-custom-gesture-processing.html)
