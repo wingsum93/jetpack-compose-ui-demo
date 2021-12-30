@@ -1,5 +1,7 @@
 package com.ericho.compose.demo.ui
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +24,9 @@ val data = listOf<Pair<String, String>>(
     "Basic animation (Cross Fade)" to Route.BASIC_ANIMATION_CROSS_FADE,
     "Low Level animation (animate*AsState)" to Route.LOW_LEVEL_ANIMATION_API_1,
     "Infinite Animation" to Route.INFINITE_ANIMATION,
-    "Custom animation (Fab with rolling down number) IP" to Route.CUSTOM_ANIMATION_1
+    "Custom animation (Fab with rolling down number) IP" to Route.CUSTOM_ANIMATION_1,
+    "Gesture and animation 1" to Route.GESTURE_ANIMATION_1,
+    "Gesture and animation 2" to Route.GESTURE_ANIMATION_2
 )
 
 @Composable
@@ -30,7 +34,9 @@ fun HomePageUi(
     navHostController: NavHostController
 ) {
     Column(
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier
+            .padding(8.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         for (i in data) {
             StandardButton(text = i.first) {

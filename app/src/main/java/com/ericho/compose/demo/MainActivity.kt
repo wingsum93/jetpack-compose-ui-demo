@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,7 +18,10 @@ import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.HomePageUi
 import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
+import com.ericho.compose.demo.ui.touch.GestureAnimationPage1
+import com.ericho.compose.demo.ui.touch.GestureAnimationPage2
 
+@ExperimentalGraphicsApi
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
 class MainActivity : ComponentActivity() {
@@ -61,6 +65,12 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Route.INFINITE_ANIMATION) {
                             InfiniteAnimationPage()
+                        }
+                        composable(Route.GESTURE_ANIMATION_1) {
+                            GestureAnimationPage1()
+                        }
+                        composable(Route.GESTURE_ANIMATION_2) {
+                            GestureAnimationPage2()
                         }
                     }
                 }
