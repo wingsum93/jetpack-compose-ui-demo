@@ -18,13 +18,17 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import kotlin.math.roundToInt
 
 @ExperimentalGraphicsApi
 @Composable
 fun GestureAnimationPage1() {
+    val initOffsetX = LocalConfiguration.current.screenWidthDp /2
+    val initOffsetY = LocalConfiguration.current.screenHeightDp /2
     val circleColor = Color.hsl(200f, 0.5f, 0.5f)
-    val offset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
+    val offset = remember { Animatable(Offset(initOffsetX.toFloat(), initOffsetY.toFloat()), Offset.VectorConverter) }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -39,7 +43,7 @@ fun GestureAnimationPage1() {
                             // Animate to the tap position.
                             offset.animateTo(
                                 position,
-                                tween(1500), initialVelocity = Offset(0f, 0f)
+                                tween(800), initialVelocity = Offset(0f, 0f)
                             )
                         }
                     }
