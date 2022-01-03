@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                         }
                         for (d in data2) {
                             composable(d.key) {
-                                d.invoke.invoke(it)
+                                d.init.invoke(it)
                             }
                         }
                     }

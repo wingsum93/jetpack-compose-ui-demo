@@ -4,20 +4,20 @@ class PageObj(
     var title: String,
     var key: String,
     var tags: MutableList<String> = mutableListOf(),
-    val invoke: CustomPageInvoke = {}
+    val init: CustomPageInit = {}
 ) {
     companion object {
         fun create(
             title: String,
             key: String,
             vararg tags: String,
-            invoke: CustomPageInvoke = {}
+            init: CustomPageInit = {}
         ): PageObj {
             return PageObj(
                 title = title,
                 key = key,
                 tags = tags.toMutableList(),
-                invoke = invoke
+                init = init
             )
         }
     }
