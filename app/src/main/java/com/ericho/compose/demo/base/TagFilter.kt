@@ -1,19 +1,21 @@
 package com.ericho.compose.demo.base
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 
 @Composable
 fun TagFilter(
@@ -28,7 +30,9 @@ fun TagFilter(
     Row(modifier = Modifier) {
         Text(
             text = "Filter by:",
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(5.dp, 0.dp)
         )
         LazyRow(
             modifier = Modifier
@@ -45,7 +49,8 @@ fun TagFilter(
                         ButtonDefaults.textButtonColors()
                 TextButton(
                     colors = colors,
-                    border = BorderStroke(2.dp, MaterialTheme.colors.primary),
+                    border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+                    modifier = Modifier.padding(3.dp, 0.dp),
                     onClick = {
                         selectedTag = tag
                         onTagSelect(tag)
@@ -58,11 +63,14 @@ fun TagFilter(
             })
         }
         if (selectedTag != null) {
-            TextButton(onClick = {
+            Button(onClick = {
                 onTagReset.invoke()
                 selectedTag = null
             }) {
-                Text(text = "Reset")
+                Image(
+                    imageVector = Icons.Default.Close, contentDescription = "",
+                    colorFilter = ColorFilter.tint(Color.White)
+                )
             }
         }
     }
