@@ -13,10 +13,10 @@ import com.ericho.compose.demo.ui.touch.GestureAnimationPage2
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 val data2 = listOf(
-    PageObj.create("Constraint Layout", Route.CONSTRAINT_LAYOUT) {
+    PageObj.create("Constraint Layout", Route.CONSTRAINT_LAYOUT, "custom layout") {
         ConstraintLayoutExamplePage()
     },
-    PageObj.create("Animation Color", Route.ANIMATION_COLOR) {
+    PageObj.create("Animation Color", Route.ANIMATION_COLOR, "animation") {
         AnimateColorPage()
     },
     PageObj.create(
