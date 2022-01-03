@@ -1,8 +1,8 @@
 package com.ericho.compose.demo.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -28,7 +28,7 @@ fun HomePageUi(
 ) {
     // init data analyze
     val allTags = data2.flatMap { it.tags }
-    allTags.sorted()
+    val distinctTags = allTags.distinct().sorted()
     val scope = rememberCoroutineScope()
     var filterTag by remember { mutableStateOf<String?>(null) }
     Scaffold(
@@ -44,18 +44,19 @@ fun HomePageUi(
                 .padding(8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Row(
-                modifier = Modifier.scrollable(rememberScrollState(), Orientation.Horizontal)
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
-                for (oneTag in allTags) {
+                items(items = distinctTags, itemContent = { tag ->
                     TextButton(onClick = {
                         scope.launch {
-                            filterTag = oneTag
+                            filterTag = tag
                         }
                     }) {
-                        Text(text = oneTag)
+                        Text(text = tag)
                     }
-                }
+                })
             }
             for (i in filteredList) {
                 StandardButton(text = i.title) {

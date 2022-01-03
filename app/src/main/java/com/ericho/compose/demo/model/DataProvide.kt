@@ -60,10 +60,10 @@ val data2 = listOf(
     ) {
         CustomAnimationFabNumberRollingDown()
     },
-    PageObj.create("Gesture and animation 1", Route.GESTURE_ANIMATION_1, "animation") {
+    PageObj.create("Gesture and animation 1", Route.GESTURE_ANIMATION_1, "animation", "gesture") {
         GestureAnimationPage1()
     },
-    PageObj.create("Gesture and animation 2", Route.GESTURE_ANIMATION_2, "animation") {
+    PageObj.create("Gesture and animation 2", Route.GESTURE_ANIMATION_2, "animation", "gesture") {
         GestureAnimationPage2()
     }
 
