@@ -16,10 +16,14 @@ object Route {
     const val INFINITE_ANIMATION = "/INFINITE_ANIMATION"
     const val GESTURE_ANIMATION_1 = "/GESTURE_ANIMATION_1"
     const val GESTURE_ANIMATION_2 = "/GESTURE_ANIMATION_2"
-    const val LOW_LEVEL_ANIMATION_API_3 = "/LOW_LEVEL_ANIMATION_API_3"
+    const val GESTURE_ANIMATION_3 = "/GESTURE_ANIMATION_3"
 
     //
     const val CUSTOM_ANIMATION_1 = "/CUSTOM_ANIMATION_1"
     const val CUSTOM_ANIMATION_2 = "/CUSTOM_ANIMATION_2"
 
+    //gesture
+    const val GESTURE_DEMO = "/GESTURE_DEMO"
+    const val DragGestureDemo = "/DragGestureDemo"
+    const val TransformGestureDemo = "/TransformGestureDemo"
 }
