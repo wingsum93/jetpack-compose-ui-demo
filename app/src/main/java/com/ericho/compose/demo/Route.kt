@@ -26,4 +26,5 @@ object Route {
     const val GESTURE_DEMO = "/GESTURE_DEMO"
     const val DragGestureDemo = "/DragGestureDemo"
     const val TransformGestureDemo = "/TransformGestureDemo"
+    const val BaseDragGestureDemo = "/BaseDragGestureDemo"
 }

@@ -96,8 +96,10 @@ val data2 = listOf(
     PageObj.create("TransformGestureDemo", Route.TransformGestureDemo, Tags.gesture) {
         TransformGestureDemo()
     },
-
-    )
+    PageObj.create("BaseDragGestureDemo", Route.BaseDragGestureDemo, Tags.gesture) {
+        BaseDragGestureDemo()
+    },
+)
 
 object Tags {
     const val animation = "animation"
