@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 
 @Composable
-fun TagFilter(
+fun SingleTagFilter(
     tags: List<String>,
     onTagSelect: (String) -> Unit = {},
     onTagReset: () -> Unit = {}
@@ -79,7 +79,7 @@ fun TagFilter(
 
 @Preview
 @Composable
-fun TagFilterPreview() {
+fun SingleTagFilterPreview() {
     val sampleTags = listOf("first tag", "second tag")
-    TagFilter(sampleTags)
+    SingleTagFilter(sampleTags)
 }

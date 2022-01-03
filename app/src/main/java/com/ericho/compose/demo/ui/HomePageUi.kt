@@ -15,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.ericho.compose.demo.base.SingleTagFilter
 import com.ericho.compose.demo.base.StandardButton
-import com.ericho.compose.demo.base.TagFilter
 import com.ericho.compose.demo.model.data2
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -47,7 +47,7 @@ fun HomePageUi(
                 .padding(8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            TagFilter(tags = distinctTags,
+            SingleTagFilter(tags = distinctTags,
                 onTagSelect = {
                     filterTag = it
                 },
