@@ -14,12 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
+import com.ericho.compose.demo.model.data2
 import com.ericho.compose.demo.ui.HomePageUi
-import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
-import com.ericho.compose.demo.ui.touch.GestureAnimationPage1
-import com.ericho.compose.demo.ui.touch.GestureAnimationPage2
+
 
 @ExperimentalGraphicsApi
 @ExperimentalMaterialApi
@@ -39,38 +37,10 @@ class MainActivity : ComponentActivity() {
                         composable(Route.HOME) {
                             HomePageUi(navController)
                         }
-                        composable(Route.CONSTRAINT_LAYOUT) {
-                            ConstraintLayoutExamplePage()
-                        }
-                        composable(Route.BASIC_ANIMATION_VISIBILITY) {
-                            BasicAnimationVisibilityPage()
-                        }
-                        composable(Route.BASIC_ANIMATION_CONTENT) {
-                            BasicAnimationContentPage()
-                        }
-                        composable(Route.BASIC_ANIMATION_CONTENT2) {
-                            BasicAnimationContentPage2()
-                        }
-                        composable(Route.BASIC_ANIMATION_CROSS_FADE) {
-                            AnimationCrossFadePage()
-                        }
-                        composable(Route.CUSTOM_ANIMATION_1) {
-                            CustomAnimationFabNumberRollingDown()
-                        }
-                        composable(Route.LOW_LEVEL_ANIMATION_API_1) {
-                            LowLevelAnimationApiPage()
-                        }
-                        composable(Route.ANIMATION_COLOR) {
-                            AnimateColorPage()
-                        }
-                        composable(Route.INFINITE_ANIMATION) {
-                            InfiniteAnimationPage()
-                        }
-                        composable(Route.GESTURE_ANIMATION_1) {
-                            GestureAnimationPage1()
-                        }
-                        composable(Route.GESTURE_ANIMATION_2) {
-                            GestureAnimationPage2()
+                        for (d in data2) {
+                            composable(d.key) {
+                                d.invoke.invoke(it)
+                            }
                         }
                     }
                 }
@@ -79,6 +49,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalGraphicsApi
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
