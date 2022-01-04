@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.ericho.compose.demo.ImageUrl
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -26,7 +27,7 @@ fun BaseDragGestureDemo() {
     var boxSize = 100.dp
     var offset by remember { mutableStateOf(Offset.Zero) }
     val painter =
-        rememberImagePainter(data = "https://www.freeiconspng.com/uploads/pocket-mortys-cheats-icon-18.jpeg")
+        rememberImagePainter(data = ImageUrl.morty)
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()

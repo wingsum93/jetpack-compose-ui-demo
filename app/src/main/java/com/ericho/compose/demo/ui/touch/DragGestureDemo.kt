@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.ericho.compose.demo.ImageUrl
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -28,7 +29,7 @@ fun DragGestureDemo() {
         modifier = Modifier.fillMaxSize()
     ) {
         Image(
-            painter = rememberImagePainter(data = "https://www.freeiconspng.com/uploads/pocket-mortys-cheats-icon-18.jpeg"),
+            painter = rememberImagePainter(data = ImageUrl.morty),
             contentDescription = "Pocket Mortys Cheats Icon",
             modifier = Modifier
                 .size(boxSize)
