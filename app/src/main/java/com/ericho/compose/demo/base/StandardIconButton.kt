@@ -1,20 +1,22 @@
 package com.ericho.compose.demo.base
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.ericho.compose.demo.ColorUtil
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
 fun StandardIconButton(
@@ -22,21 +24,24 @@ fun StandardIconButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
-    val borderColor = remember(text) {
+    val arrowColor = remember(text) {
         ColorUtil.getRandomColor()
     }
-
     Button(
         onClick = onClick,
-        modifier = modifier
-            .border(2.dp, borderColor, RoundedCornerShape(5.dp))
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+        elevation = ButtonDefaults.elevation()
     ) {
         Row(
-//            modifier = modifier.border(2.dp, borderColor, RoundedCornerShape(5.dp))
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = text)
+            Text(text = text, modifier = Modifier.fillMaxWidth(0.8f))
             val vp = rememberVectorPainter(image = Icons.Default.KeyboardArrowRight)
-            Image(painter = vp, contentDescription = null)
+            Image(
+                painter = vp,
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(arrowColor)
+            )
         }
     }
 }

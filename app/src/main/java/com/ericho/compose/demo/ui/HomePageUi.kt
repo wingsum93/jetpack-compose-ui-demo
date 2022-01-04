@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ericho.compose.demo.base.SingleTagFilter
-import com.ericho.compose.demo.base.StandardButton
+import com.ericho.compose.demo.base.StandardIconButton
 import com.ericho.compose.demo.model.data2
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -55,7 +55,7 @@ fun HomePageUi(
                     filterTag = null
                 })
             for (i in filteredList) {
-                StandardButton(text = i.title) {
+                StandardIconButton(text = i.title) {
                     navHostController.navigate(i.key)
                 }
                 Spacer(modifier = Modifier.height(12.dp))
