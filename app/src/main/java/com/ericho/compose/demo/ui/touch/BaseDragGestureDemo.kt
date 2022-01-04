@@ -1,6 +1,6 @@
 package com.ericho.compose.demo.ui.touch
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.awaitDragOrCancellation
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.forEachGesture
@@ -9,12 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -25,6 +25,8 @@ import kotlin.math.roundToInt
 fun BaseDragGestureDemo() {
     var boxSize = 100.dp
     var offset by remember { mutableStateOf(Offset.Zero) }
+    val painter =
+        rememberImagePainter(data = "https://www.freeiconspng.com/uploads/pocket-mortys-cheats-icon-18.jpeg")
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
@@ -34,7 +36,6 @@ fun BaseDragGestureDemo() {
             .offset {
                 IntOffset(offset.x.roundToInt(), offset.y.roundToInt())
             }
-            .background(Color.Green)
             .pointerInput(Unit) {
                 forEachGesture {
                     awaitPointerEventScope {
@@ -49,7 +50,12 @@ fun BaseDragGestureDemo() {
                     }
                 }
             }
-        )
+        ) {
+            Image(
+                painter = painter, contentDescription = "Morty",
+                modifier = Modifier.fillMaxSize()
+            )
+        }
         Text(text = "BaseDragGestureDemo", modifier = Modifier.align(Alignment.TopCenter))
     }
 }
