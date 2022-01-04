@@ -22,40 +22,41 @@ import kotlin.math.roundToInt
 
 @Composable
 fun DragGestureDemo() {
-    var boxSize = 100.dp
+    val boxSize = 100.dp
     var offset by remember { mutableStateOf(Offset.Zero) }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(
-            painter = rememberImagePainter(data = ImageUrl.morty),
-            contentDescription = "Pocket Mortys Cheats Icon",
-            modifier = Modifier
-                .size(boxSize)
-                .offset {
-                    IntOffset(offset.x.roundToInt(), offset.y.roundToInt())
-                }
-                .pointerInput(Unit) {
-                    detectDragGestures(
-                        onDragStart = { offset ->
-                            // Drag to start
-                        },
-                        onDragEnd = {
-                            // Drag end
-                            Log.d("1999", "drag end")
-                        },
-                        onDragCancel = {
-                            // Drag to cancel
-                            Log.d("1999", "drag cancel")
-                        },
-                        onDrag = { change: PointerInputChange, dragAmount: Offset ->
-                            // Dragging
-                            offset += dragAmount
-                        }
-                    )
-                }
-        )
+        Box(Modifier
+            .size(boxSize)
+            .offset {
+                IntOffset(offset.x.roundToInt(), offset.y.roundToInt())
+            }
+            .pointerInput(Unit) {
+                detectDragGestures(
+                    onDragStart = { offset ->
+                        // Drag to start
+                    },
+                    onDragEnd = {
+                        // Drag end
+                        Log.d("1999", "drag end")
+                    },
+                    onDragCancel = {
+                        // Drag to cancel
+                        Log.d("1999", "drag cancel")
+                    },
+                    onDrag = { change: PointerInputChange, dragAmount: Offset ->
+                        // Dragging
+                        offset += dragAmount
+                    }
+                )
+            }) {
+            Image(
+                painter = rememberImagePainter(data = ImageUrl.morty),
+                contentDescription = "Pocket Mortys Cheats Icon"
+            )
+        }
     }
 }
 

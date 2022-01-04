@@ -91,7 +91,7 @@ val data2 = listOf(
         TapGestureDemo()
     },
     PageObj.create(
-        "DragGestureDemo (detect drag in image view)",
+        "DragGestureDemo (detectDragGestures)",
         Route.DragGestureDemo,
         Tags.gesture
     ) {
@@ -101,7 +101,7 @@ val data2 = listOf(
         TransformGestureDemo()
     },
     PageObj.create(
-        "BaseDragGestureDemo (detect drag in parent box view)",
+        "BaseDragGestureDemo (use low level gesture api - awaitDragOrCancellation)",
         Route.BaseDragGestureDemo,
         Tags.gesture
     ) {
