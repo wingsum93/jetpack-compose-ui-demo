@@ -90,13 +90,21 @@ val data2 = listOf(
     PageObj.create("TapGestureDemo", Route.GESTURE_DEMO, Tags.gesture) {
         TapGestureDemo()
     },
-    PageObj.create("DragGestureDemo", Route.DragGestureDemo, Tags.gesture) {
+    PageObj.create(
+        "DragGestureDemo (detect drag in image view)",
+        Route.DragGestureDemo,
+        Tags.gesture
+    ) {
         DragGestureDemo()
     },
     PageObj.create("TransformGestureDemo", Route.TransformGestureDemo, Tags.gesture) {
         TransformGestureDemo()
     },
-    PageObj.create("BaseDragGestureDemo", Route.BaseDragGestureDemo, Tags.gesture) {
+    PageObj.create(
+        "BaseDragGestureDemo (detect drag in parent box view)",
+        Route.BaseDragGestureDemo,
+        Tags.gesture
+    ) {
         BaseDragGestureDemo()
     },
 )
