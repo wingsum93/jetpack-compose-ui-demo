@@ -27,4 +27,7 @@ object Route {
     const val DragGestureDemo = "/DragGestureDemo"
     const val TransformGestureDemo = "/TransformGestureDemo"
     const val BaseDragGestureDemo = "/BaseDragGestureDemo"
+
+    //
+    const val ClickEventOverlayDemo = "/ClickEventOverlayDemo"
 }

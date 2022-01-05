@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import com.ericho.compose.demo.Route
 import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.animation.*
+import com.ericho.compose.demo.ui.custom.ClickEventOverlayDemo
 import com.ericho.compose.demo.ui.touch.*
 
 @ExperimentalGraphicsApi
@@ -107,10 +108,18 @@ val data2 = listOf(
     ) {
         BaseDragGestureDemo()
     },
+    PageObj.create(
+        "ClickEventOverlayDemo (test click event overlay)",
+        Route.ClickEventOverlayDemo,
+        Tags.ui
+    ) {
+        ClickEventOverlayDemo()
+    },
 )
 
 object Tags {
     const val animation = "animation"
     const val gesture = "gesture"
     const val custom_layout = "custom layout"
+    const val ui = "ui"
 }
