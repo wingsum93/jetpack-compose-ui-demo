@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -38,26 +39,31 @@ fun ClickEventOverlayDemo() {
                     Timber.d("morty icon clicked")
                 })
         }
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(onClick = {
-                Timber.d("first icon clicked")
-            }) {
-                Icon(Icons.Filled.ArrowBack, null)
-            }
+        Surface(
+            color = Color.Transparent,
+            modifier = Modifier
+        ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(onClick = {
+                    Timber.d("first icon clicked")
+                }) {
+                    Icon(Icons.Filled.ArrowBack, null)
+                }
 
-            IconButton(onClick = {
-                Timber.d("second icon clicked")
-            }) {
-                Icon(Icons.Filled.PlayArrow, null)
-            }
+                IconButton(onClick = {
+                    Timber.d("second icon clicked")
+                }) {
+                    Icon(Icons.Filled.PlayArrow, null)
+                }
 
-            IconButton(onClick = {
-                Timber.d("third icon clicked")
-            }) {
-                Icon(Icons.Filled.ArrowForward, null)
+                IconButton(onClick = {
+                    Timber.d("third icon clicked")
+                }) {
+                    Icon(Icons.Filled.ArrowForward, null)
+                }
+                Spacer(modifier = Modifier.weight(1f))
             }
-            Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
