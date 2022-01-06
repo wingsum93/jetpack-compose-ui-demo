@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import com.ericho.compose.demo.R
@@ -35,8 +36,13 @@ val drinkPromotion = listOf<DrinkModel>(
         300,
         "https://www.mashed.com/img/gallery/the-fruit-juice-that-is-way-more-nutritious-than-you-might-think/the-surprising-health-benefits-of-cantaloupe-juice-1627652960.webp"
     ),
-
-    )
+    DrinkModel(
+        "Orange juice",
+        "Best for fitness",
+        500,
+        "https://www.mashed.com/img/gallery/5-juices-you-should-be-drinking-and-5-you-shouldnt/intro.jpg"
+    ),
+)
 
 @Composable
 fun HealthFruitDrinkDemo() {
@@ -67,16 +73,22 @@ fun HealthFruitDrinkDemo() {
                             .aspectRatio(16 / 9f)
                     )
 
-                    Text(text = it.title, modifier = Modifier.constrainAs(title) {
-                        start.linkTo(parent.start)
-                        top.linkTo(image.bottom)
-                    })
+                    Text(text = it.title, modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                        .constrainAs(title) {
+                            start.linkTo(parent.start, 10.dp)
+                            top.linkTo(image.bottom, 5.dp)
+                        })
                     Text(
                         text = it.description,
-                        modifier = Modifier.constrainAs(description) {
-                            start.linkTo(parent.start)
-                            top.linkTo(title.bottom)
-                        }
+                        fontSize = 8.sp,
+                        modifier = Modifier
+                            .fillMaxWidth(0.7f)
+                            .constrainAs(description) {
+                                start.linkTo(parent.start, 10.dp)
+                                top.linkTo(title.bottom)
+                                bottom.linkTo(parent.bottom, 10.dp)
+                            }
                     )
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_star_24),
