@@ -124,7 +124,7 @@ val data2 = listOf(
     },
     PageObj.create(
         "HealthFruitDrinkDemo (animate star icon in list)",
-        Route.ClickEventOverlayDemo,
+        Route.HealthFruitDrinkDemo,
         Tags.animation
     ) {
         HealthFruitDrinkDemo()
