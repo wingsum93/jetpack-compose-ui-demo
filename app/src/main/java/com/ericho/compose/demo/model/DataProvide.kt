@@ -2,8 +2,13 @@ package com.ericho.compose.demo.model
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import com.ericho.compose.demo.Route
+import com.ericho.compose.demo.data.CatsRepo
 import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.custom.ClickEventOverlayDemo
@@ -123,6 +128,21 @@ val data2 = listOf(
         Tags.animation
     ) {
         HealthFruitDrinkDemo()
+    },
+    PageObj.create(
+        "CatListWithSwipe (swipe to delete in list)",
+        Route.CatListWithSwipe,
+        Tags.gesture
+    ) {
+        var list by remember {
+            mutableStateOf(CatsRepo.getCats())
+        }
+        CatListWithSwipe(
+            list, { cat ->
+                list = list.toMutableList().also { it.add(cat) }
+            }, { cat ->
+                list = list.toMutableList().also { it.remove(cat) }
+            })
     },
 )
 
