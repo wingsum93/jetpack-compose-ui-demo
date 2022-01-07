@@ -9,34 +9,33 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
-import com.ericho.compose.demo.R
+import com.ericho.compose.demo.base.AnimatedHeartButton
 import com.ericho.compose.demo.model.DrinkModel
+import com.ericho.compose.demo.model.createDrinkModel
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import androidx.compose.foundation.layout.*
 
 val drinkPromotion = listOf<DrinkModel>(
-    DrinkModel(
+    createDrinkModel(
         "Nutritious Drink", "The Fruit Juice That Is Way More Nutritious Than You Might Think", 500,
         "https://www.mashed.com/img/gallery/the-fruit-juice-that-is-way-more-nutritious-than-you-might-think/intro-1627652960.webp"
     ),
-    DrinkModel(
+    createDrinkModel(
         "cantaloupe juice",
         "this juicy melon has barely any calories or fat due to its high water content",
         300,
         "https://www.mashed.com/img/gallery/the-fruit-juice-that-is-way-more-nutritious-than-you-might-think/the-surprising-health-benefits-of-cantaloupe-juice-1627652960.webp"
     ),
-    DrinkModel(
+    createDrinkModel(
         "Orange juice",
         "Best for fitness",
         500,
@@ -44,6 +43,7 @@ val drinkPromotion = listOf<DrinkModel>(
     ),
 )
 
+@ExperimentalCoroutinesApi
 @Composable
 fun HealthFruitDrinkDemo() {
     Scaffold(topBar = {
@@ -81,7 +81,7 @@ fun HealthFruitDrinkDemo() {
                         })
                     Text(
                         text = it.description,
-                        fontSize = 8.sp,
+                        fontSize = 10.sp,
                         modifier = Modifier
                             .fillMaxWidth(0.7f)
                             .constrainAs(description) {
@@ -90,18 +90,19 @@ fun HealthFruitDrinkDemo() {
                                 bottom.linkTo(parent.bottom, 10.dp)
                             }
                     )
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_baseline_star_24),
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(Color.Red),
+                    var buttonState1 by remember {
+                        mutableStateOf(true)
+                    }
+                    AnimatedHeartButton(
                         modifier = Modifier
-                            .size(35.dp)
+                            .size(50.dp)
                             .constrainAs(star) {
-                                end.linkTo(parent.end)
-                                bottom.linkTo(parent.bottom)
-                            }
-                    )
-
+                                end.linkTo(parent.end, 10.dp)
+                                bottom.linkTo(parent.bottom, 10.dp)
+                            }, buttonState = buttonState1
+                    ) {
+                        buttonState1 = !buttonState1
+                    }
                 }
             }
         }
@@ -109,6 +110,7 @@ fun HealthFruitDrinkDemo() {
 }
 
 
+@ExperimentalCoroutinesApi
 @Preview
 @Composable
 fun HealthFruitDrinkDemoPreview() {

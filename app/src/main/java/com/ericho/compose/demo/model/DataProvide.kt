@@ -8,7 +8,9 @@ import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.custom.ClickEventOverlayDemo
 import com.ericho.compose.demo.ui.touch.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @ExperimentalGraphicsApi
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
@@ -114,6 +116,13 @@ val data2 = listOf(
         Tags.ui
     ) {
         ClickEventOverlayDemo()
+    },
+    PageObj.create(
+        "HealthFruitDrinkDemo (animate star icon in list)",
+        Route.ClickEventOverlayDemo,
+        Tags.animation
+    ) {
+        HealthFruitDrinkDemo()
     },
 )
 

@@ -30,4 +30,5 @@ object Route {
 
     //
     const val ClickEventOverlayDemo = "/ClickEventOverlayDemo"
+    const val HealthFruitDrinkDemo = "/HealthFruitDrinkDemo"
 }
