@@ -13,3 +13,4 @@
 ### Compose article
 
 [Swipe to reveal in Jetpack Compose](https://proandroiddev.com/swipe-to-reveal-in-jetpack-compose-6ffa8928a4c2)
+[Swipe to delete with animation (compose)](https://developersbreach.com/swipe-to-delete-compose/)
