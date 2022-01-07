@@ -144,6 +144,13 @@ val data2 = listOf(
                 list = list.toMutableList().also { it.remove(cat) }
             })
     },
+    PageObj.create(
+        "AnimateGraphicLayerDemo (animate rotation XY in graphicsLayer)",
+        Route.AnimateGraphicLayerDemo,
+        Tags.animation
+    ) {
+        AnimateGraphicLayerDemo()
+    },
 )
 
 object Tags {

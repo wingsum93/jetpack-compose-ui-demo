@@ -1,5 +1,13 @@
 # Jetpack Compose UI Demo
 
+## Highlight
+
+### Animation
+
+Rotate image using graphicsLayer modifier -> see AnimateGraphicLayerDemo
+
+### Gesture
+
 ## Reference
 
 [Compose overall doc](https://developer.android.com/jetpack/compose/documentation)

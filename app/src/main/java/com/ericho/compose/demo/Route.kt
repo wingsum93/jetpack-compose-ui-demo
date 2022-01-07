@@ -32,4 +32,5 @@ object Route {
     const val ClickEventOverlayDemo = "/ClickEventOverlayDemo"
     const val HealthFruitDrinkDemo = "/HealthFruitDrinkDemo"
     const val CatListWithSwipe = "/CatListWithSwipe"
+    const val AnimateGraphicLayerDemo = "/AnimateGraphicLayerDemo"
 }
