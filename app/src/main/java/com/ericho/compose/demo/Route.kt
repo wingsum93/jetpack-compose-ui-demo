@@ -33,4 +33,6 @@ object Route {
     const val HealthFruitDrinkDemo = "/HealthFruitDrinkDemo"
     const val CatListWithSwipe = "/CatListWithSwipe"
     const val AnimateGraphicLayerDemo = "/AnimateGraphicLayerDemo"
+    const val FluidSliderNativeDemo = "/FluidSliderNativeDemo"
+    const val FluidSliderDemo = "/FluidSliderDemo"
 }

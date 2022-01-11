@@ -12,6 +12,8 @@ import com.ericho.compose.demo.data.CatsRepo
 import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.custom.ClickEventOverlayDemo
+import com.ericho.compose.demo.ui.custom.FluidSliderDemo
+import com.ericho.compose.demo.ui.custom.FluidSliderNativeDemo
 import com.ericho.compose.demo.ui.touch.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -150,6 +152,20 @@ val data2 = listOf(
         Tags.animation
     ) {
         AnimateGraphicLayerDemo()
+    },
+    PageObj.create(
+        "FluidSliderNativeDemo (use non-compose lib)",
+        Route.FluidSliderNativeDemo,
+        Tags.animation, Tags.gesture
+    ) {
+        FluidSliderNativeDemo()
+    },
+    PageObj.create(
+        "FluidSliderDemo (in progress)",
+        Route.FluidSliderDemo,
+        Tags.animation, Tags.gesture
+    ) {
+        FluidSliderDemo()
     },
 )
 
