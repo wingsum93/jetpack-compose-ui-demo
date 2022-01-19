@@ -22,7 +22,7 @@ fun PieChatDemo() {
             .fillMaxSize()
             .padding(10.dp)
     ) {
-        val (pieChart, btn) = createRefs()
+        val (pieChart, btn, txv1, txv2) = createRefs()
         var flowInProgress by remember { mutableStateOf(false) }
         val transition = updateTransition(targetState = flowInProgress, "trans")
         val outlineAngle by
@@ -55,6 +55,16 @@ fun PieChatDemo() {
             }) {
             Text(text = "Click to toggle on / off")
         }
+        Text(text = "outlineAngle> $outlineAngle", Modifier.constrainAs(txv1) {
+            bottom.linkTo(btn.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        })
+        Text(text = "pictureAngle> $pictureAngle", Modifier.constrainAs(txv2) {
+            bottom.linkTo(btn.top, 40.dp)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        })
     }
 }
 

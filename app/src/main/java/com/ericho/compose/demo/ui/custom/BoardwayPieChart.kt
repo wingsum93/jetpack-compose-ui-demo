@@ -1,5 +1,6 @@
 package com.ericho.compose.demo.ui.custom
 
+import android.graphics.Paint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -10,6 +11,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +23,8 @@ import com.ericho.compose.demo.R
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.sizeIn
+import kotlin.math.abs
+import kotlin.math.max
 
 @Composable
 fun BoardwayPieChart(
@@ -38,7 +44,7 @@ fun BoardwayPieChart(
         id = R.drawable.boardway_shape
     )
     //calculate sector of 3 arc
-    val isOutlineFull = outlineSafeAngle < 360f
+    val isOutlineNotFull = outlineSafeAngle < 360f
     val isImageFull = imageSafeAngle < 360f
 
     Canvas(
@@ -62,7 +68,8 @@ fun BoardwayPieChart(
             val angle3 = 240 + angleOffset
 
             val stokeWidth = size.width * 0.24f
-            val currentOutlineAngle = outlineSafeAngle - imageSafeAngle
+            val currentOutlineAngle = abs(outlineSafeAngle - imageSafeAngle)
+            val whiteAngle = abs(360f - max(outlineSafeAngle, imageSafeAngle))
             ///
             drawImage(image = bitmap, srcSize = IntSize(widthInt, heightInt))
             // Head
@@ -77,6 +84,14 @@ fun BoardwayPieChart(
                 color = circleOutlineColor,
                 startAngle = angle1 - currentOutlineAngle,
                 sweepAngle = currentOutlineAngle,
+                useCenter = false,
+                style = Stroke(width = stokeWidth)
+            )
+            //draw white circle
+            drawArc(
+                color = Color.White,
+                startAngle = angle1 - whiteAngle,
+                sweepAngle = whiteAngle,
                 useCenter = false,
                 style = Stroke(width = stokeWidth)
             )
@@ -102,6 +117,18 @@ fun BoardwayPieChart(
                 useCenter = false,
                 style = Stroke(width = stokeWidth)
             )
+            val paint = android.graphics.Paint()
+            paint.textAlign = Paint.Align.CENTER
+            paint.textSize = 64f
+            paint.color = Color.Gray.toArgb()
+            drawIntoCanvas {
+                it.nativeCanvas.drawText(
+                    "member : Premium",
+                    center.x,
+                    center.y,
+                    paint
+                )
+            }
         }
     )
 }
