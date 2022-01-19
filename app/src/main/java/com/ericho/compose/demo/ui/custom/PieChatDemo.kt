@@ -1,6 +1,7 @@
 package com.ericho.compose.demo.ui.custom
 
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.material.Button
@@ -26,11 +27,27 @@ fun PieChatDemo() {
         var flowInProgress by remember { mutableStateOf(false) }
         val transition = updateTransition(targetState = flowInProgress, "trans")
         val outlineAngle by
-        transition.animateFloat(label = "pAngle", transitionSpec = { tween(2500) }) {
+        transition.animateFloat(label = "pAngle", transitionSpec = {
+            if (targetState) {
+                keyframes {
+                    durationMillis = 5000
+                    120f at 1000
+                    240f at 3000
+                    360f at 5000
+                }
+            } else {
+                keyframes {
+                    durationMillis = 5000
+                    300f at 1000
+                    240f at 3000
+                    120f at 5000
+                }
+            }
+        }) {
             if (it) 360f else 0f
         }
         val pictureAngle by
-        transition.animateFloat(label = "pAngle", transitionSpec = { tween(3000, 2500) }) {
+        transition.animateFloat(label = "pAngle", transitionSpec = { tween(3000, 5000) }) {
             if (it) 360f else 0f
         }
 
