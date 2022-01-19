@@ -15,14 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.ericho.compose.demo.R
+import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 import androidx.compose.foundation.layout.sizeIn
 
 @Composable
 fun BoardwayPieChart(
     modifier: Modifier = Modifier
 ) {
-    val greenLight700 = Color(108, 243, 114, 206)
-    val green700 = Color(13, 245, 23, 248)
+    val greenLight700 = Color(151, 207, 153, 248)
+    val green700 = Color(6, 235, 16, 248)
     val red700 = Color(245, 13, 13, 248)
     val dark = Color(7, 7, 7, 248)
 //    val p = painterResource(R.drawable.boardway_shape)
@@ -83,5 +84,7 @@ fun BoardwayPieChart(
 @Preview(showBackground = true)
 @Composable
 fun BoardwayPieChartPreview() {
-    BoardwayPieChart()
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart()
+    }
 }
