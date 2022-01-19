@@ -8,6 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
@@ -33,14 +34,15 @@ fun HomePageUi(
     // init data analyze
     val allTags = data2.flatMap { it.tags }
     val distinctTags = allTags.distinct().sorted()
-    var filterTag by remember { mutableStateOf<String?>(null) }
+    var filterTag by rememberSaveable { mutableStateOf<String?>(null) }
+    val filteredList = remember(key1 = filterTag) {
+        if (filterTag == null) data2 else data2.filter { it.tags.contains(filterTag) }
+    }
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(text = "Ui Demo") }, backgroundColor = Color.White)
         }
     ) { paddingValue ->
-        val filteredList =
-            if (filterTag == null) data2 else data2.filter { it.tags.contains(filterTag) }
         Column(
             modifier = Modifier
                 .padding(paddingValue)
