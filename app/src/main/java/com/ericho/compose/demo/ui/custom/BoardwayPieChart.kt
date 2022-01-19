@@ -1,13 +1,13 @@
 package com.ericho.compose.demo.ui.custom
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
@@ -22,66 +22,81 @@ import androidx.compose.foundation.layout.sizeIn
 fun BoardwayPieChart(
     modifier: Modifier = Modifier
 ) {
-    val greenLight700 = Color(151, 207, 153, 248)
-    val green700 = Color(6, 235, 16, 248)
-    val red700 = Color(245, 13, 13, 248)
-    val dark = Color(7, 7, 7, 248)
-//    val p = painterResource(R.drawable.boardway_shape)
     val bitmap = ImageBitmap.imageResource(
         res = LocalContext.current.resources,
         id = R.drawable.boardway_shape
     )
     Canvas(
-        modifier = modifier.sizeIn(
-            minWidth = 300.dp,
-            minHeight = 300.dp,
-            maxHeight = 500.dp,
-            maxWidth = 500.dp
-        ),
+        modifier = modifier
+            .sizeIn(
+                minWidth = 300.dp,
+                minHeight = 300.dp,
+                maxHeight = 500.dp,
+                maxWidth = 500.dp
+            )
+            .clip(CircleShape),
         onDraw = {
+            //data part
             val heightInt = size.height.toInt()
             val widthInt = size.width.toInt()
+            val spaceColor = Color.White
+            val circleOutlineColor = Color(65, 236, 182, 255)
+            val angleOffset = -90f
+            val angle1 = 0 + angleOffset
+            val angle2 = 120 + angleOffset
+            val angle3 = 240 + angleOffset
+            val separatorAngle = 5f
+            val stokeWidth = size.width * 0.24f
+            val currentOutlineAngle = 200f
+            ///
             drawImage(image = bitmap, srcSize = IntSize(widthInt, heightInt))
             // Head
             drawCircle(
-                Brush.linearGradient(
-                    colors = listOf(greenLight700, green700)
-                ),
-                radius = size.width / 2,
+                Color.White,
+                radius = getSmallCircleRadius(size.width),
                 center = center,
-                style = Stroke(width = size.width * 0.075f)
+                style = Fill
             )
-
-            // Smile
-            val smilePadding = size.width * 0.15f
+            //basic outline arc
             drawArc(
-                color = red700,
-                startAngle = 0f,
-                sweepAngle = 180f,
-                useCenter = true,
-                topLeft = Offset(smilePadding, smilePadding),
-                size = Size(size.width - (smilePadding * 2f), size.height - (smilePadding * 2f))
+                color = circleOutlineColor,
+                startAngle = angle1 - currentOutlineAngle,
+                sweepAngle = currentOutlineAngle,
+                useCenter = false,
+                style = Stroke(width = stokeWidth)
+            )
+            //3 x space arc
+            drawArc(
+                color = spaceColor,
+                startAngle = angle1 - separatorAngle / 2,
+                sweepAngle = separatorAngle,
+                useCenter = false,
+                style = Stroke(width = stokeWidth)
+            )
+            drawArc(
+                color = spaceColor,
+                startAngle = angle2 - separatorAngle / 2,
+                sweepAngle = separatorAngle,
+                useCenter = false,
+                style = Stroke(width = stokeWidth)
+            )
+            drawArc(
+                color = spaceColor,
+                startAngle = angle3 - separatorAngle / 2,
+                sweepAngle = separatorAngle,
+                useCenter = false,
+                style = Stroke(width = stokeWidth)
             )
 
-            // Left eye
-            drawRect(
-                color = dark,
-                topLeft = Offset(size.width * 0.25f, size.height / 4),
-                size = Size(smilePadding, smilePadding)
-            )
-
-            // Right eye
-            drawRect(
-                color = dark,
-                topLeft = Offset((size.width * 0.75f) - smilePadding, size.height / 4),
-                size = Size(smilePadding, smilePadding)
-            )
         }
     )
 }
 
+private fun getSmallCircleRadius(componentWidth: Float): Float {
+    return componentWidth / 2 * 0.76.toFloat()
+}
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun BoardwayPieChartPreview() {
     JetpackComposeUiDemoTheme {
