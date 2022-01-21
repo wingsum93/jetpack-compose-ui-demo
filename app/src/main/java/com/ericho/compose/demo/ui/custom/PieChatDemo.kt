@@ -4,10 +4,12 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.background
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -21,6 +23,7 @@ fun PieChatDemo() {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.Gray)
             .padding(10.dp)
     ) {
         val (pieChart, btn, txv1, txv2) = createRefs()
