@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 
 @Composable
-fun BoardwayPieChartPage(
+fun WaveLoadingDemo(
     modifier: Modifier = Modifier
 ) {
     var _progress by remember { mutableStateOf(0.5f) }
@@ -64,9 +64,9 @@ fun BoardwayPieChartPage(
 
 @Preview(showBackground = false)
 @Composable
-fun BoardwayPieChartPagePreview() {
+fun WaveLoadingDemoPreview() {
     JetpackComposeUiDemoTheme {
-        BoardwayPieChartPage()
+        WaveLoadingDemo()
     }
 }
 
