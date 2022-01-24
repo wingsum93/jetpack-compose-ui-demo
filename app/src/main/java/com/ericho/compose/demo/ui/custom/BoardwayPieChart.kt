@@ -9,9 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,21 +28,15 @@ fun BoardwayPieChart(
     outlineProgressAngle: Float = 0f,
     // 0..360
     imageAngle: Float = 0f,
-    separatorAngle: Float = 5f,
+    separatorAngle: Float = 20f,
     circleOutlineColor: Color = Color(65, 236, 182, 255)
 ) {
 
     val outlineSafeAngle =
         remember(outlineProgressAngle) { outlineProgressAngle.coerceIn(0f..360f) }
     val imageSafeAngle = remember(imageAngle) { imageAngle.coerceIn(0f..360f) }
-    val separatorSafeAngle = remember(separatorAngle) { separatorAngle.coerceIn(3f..20f) }
-    val bitmap = ImageBitmap.imageResource(
-        res = LocalContext.current.resources,
-        id = R.drawable.boardway_shape
-    )
+    val separatorSafeAngle = remember(separatorAngle) { separatorAngle.coerceIn(10f..60f) }
     //calculate sector of 3 arc
-    val isOutlineNotFull = outlineSafeAngle < 360f
-    val isImageFull = imageSafeAngle < 360f
     val imageBitmap: ImageBitmap = ImageBitmap.imageResource(id = R.drawable.boardway_shape)
 
     Canvas(
@@ -59,7 +53,7 @@ fun BoardwayPieChart(
             //data part
             val width = this.size.width
             val height = this.size.height
-            val strokeWidth = 50f
+            val strokeWidth = 150.dp.value
             val minLength = min(this.size.width - strokeWidth, size.height - strokeWidth)
             val leftOffset = (width - minLength) / 2
             val topOffset = (height - minLength) / 2
@@ -88,37 +82,52 @@ fun BoardwayPieChart(
                     center.y,
                     paint
                 )
-
-
             }
+
+            //for color arc
             drawArc(
-                color = Color.Green,
-                startAngle = angle1MidPoint - separatorSafeAngle / 2,
-                sweepAngle = 100f,
-                useCenter = false,
-                style = Stroke(width = 25.dp.value),
-                blendMode = BlendMode.SrcOut
-            )
-            drawArc(
-                color = Color.Green,
-                startAngle = angle2MidPoint - separatorSafeAngle / 2,
-                sweepAngle = 100f,
-                useCenter = false,
+                circleOutlineColor,
+                startAngle = angle3MidPoint + smallAngleOffset,
+                sweepAngle = 120f - 2 * smallAngleOffset,
                 style = Stroke(width = strokeWidth),
-                blendMode = BlendMode.SrcOut
+                useCenter = false
             )
-            drawArc(
-                color = Color.Green,
-                startAngle = angle3MidPoint - separatorSafeAngle / 2,
-                sweepAngle = 100f,
-                useCenter = false,
-                style = Stroke(width = strokeWidth),
-                blendMode = BlendMode.SrcOut
+
+            // for image arc
+            drawImageArc(
+                startAngle = angle1MidPoint + smallAngleOffset,
+                sweepAngle = 120f - 2 * smallAngleOffset,
+                style = Stroke(width = strokeWidth)
+            )
+            drawImageArc(
+                startAngle = angle2MidPoint + smallAngleOffset,
+                sweepAngle = 120f - 2 * smallAngleOffset,
+                style = Stroke(width = strokeWidth)
+            )
+            drawImageArc(
+                startAngle = angle3MidPoint + smallAngleOffset,
+                sweepAngle = 120f - 2 * smallAngleOffset,
+                style = Stroke(width = strokeWidth)
             )
 
             drawImage(imageBitmap, blendMode = BlendMode.DstAtop)
 
         }
+    )
+}
+
+private fun DrawScope.drawImageArc(
+    startAngle: Float,
+    sweepAngle: Float,
+    style: Stroke
+) {
+    drawArc(
+        color = Color.Green,
+        startAngle = startAngle,
+        sweepAngle = sweepAngle,
+        useCenter = false,
+        style = style,
+        blendMode = BlendMode.SrcOut
     )
 }
 

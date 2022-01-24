@@ -13,9 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 
 @Composable
@@ -56,10 +54,17 @@ fun PieChatDemo() {
 
         BoardwayPieChart(
             Modifier
-                .fillMaxWidth(.9f)
-                .fillMaxHeight(.5f)
                 .constrainAs(pieChart) {
-                    centerTo(parent)
+                    linkTo(
+                        parent.start,
+                        parent.top,
+                        parent.end,
+                        parent.bottom,
+                        10.dp,
+                        20.dp,
+                        10.dp,
+                        20.dp
+                    )
                 },
             outlineProgressAngle = outlineAngle,
             imageAngle = pictureAngle
