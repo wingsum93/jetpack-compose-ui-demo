@@ -70,19 +70,24 @@ fun BoardwayPieChart(
                 )
             }
             for (i in 0 until section) {
-                var outLineAngleTemp = outlineSafeAngle - sectionFullAngle * i
-                var imageAngleTemp = imageSafeAngle - sectionFullAngle * i
-                outLineAngleTemp -= smallAngleOffset
-                imageAngleTemp -= smallAngleOffset
+                val outLineAngleTemp = outlineSafeAngle - sectionFullAngle * i
+                val imageAngleTemp = imageSafeAngle - sectionFullAngle * i
                 val outLineIsInThisSector = outLineAngleTemp > 0
                 val imageIsInThisSector = imageAngleTemp > 0
-                val outlineSweepAngle = outLineAngleTemp.coerceIn(0f, sectionReducedAngle)
-                val imageSweepAngle = imageAngleTemp.coerceIn(0f, sectionReducedAngle)
+                val outlineSweepAngle = outLineAngleTemp.coerceIn(
+                    0f,
+                    sectionFullAngle.toFloat()
+                ) * (sectionReducedAngle) / sectionFullAngle
+                val imageSweepAngle = imageAngleTemp.coerceIn(
+                    0f,
+                    sectionFullAngle.toFloat()
+                ) * (sectionReducedAngle) / sectionFullAngle
+
                 if (outLineIsInThisSector) {
                     //draw color arc
                     drawArc(
                         circleOutlineColor,
-                        startAngle = i * sectionFullAngle + angle1MidPoint + smallAngleOffset,
+                        startAngle = i * sectionFullAngle + angle1MidPoint,
                         sweepAngle = outlineSweepAngle,
                         style = Stroke(width = strokeWidth),
                         useCenter = false,
@@ -92,7 +97,7 @@ fun BoardwayPieChart(
                 if (imageIsInThisSector) {
                     //draw image arc
                     drawImageArc(
-                        startAngle = i * sectionFullAngle + angle1MidPoint + smallAngleOffset,
+                        startAngle = i * sectionFullAngle + angle1MidPoint,
                         sweepAngle = imageSweepAngle,
                         style = Stroke(width = strokeWidth),
                         color = circleOutlineColor
