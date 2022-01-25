@@ -1,7 +1,7 @@
 package com.ericho.compose.demo.ui.custom
 
+import android.view.animation.BounceInterpolator
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.ericho.compose.demo.base.InterpolatorEasing
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,28 +31,15 @@ fun PieChatDemo() {
         var flowInProgress by remember { mutableStateOf(false) }
         val transition = updateTransition(targetState = flowInProgress, "trans")
         val outlineAngle by
-        transition.animateFloat(label = "pAngle", transitionSpec = {
-            if (targetState) {
-                keyframes {
-                    durationMillis = 5000
-                    120f at 1000
-                    240f at 3000
-                    360f at 4000
-                    330f at 4500
-                }
-            } else {
-                keyframes {
-                    durationMillis = 5000
-                    300f at 1000
-                    240f at 3000
-                    120f at 5000
-                }
-            }
+        transition.animateFloat(label = "outlineAngle", transitionSpec = {
+            tween(4000, 0, InterpolatorEasing(BounceInterpolator()))
         }) {
             if (it) 360f else 0f
         }
         val pictureAngle by
-        transition.animateFloat(label = "pAngle", transitionSpec = { tween(3000, 5000) }) {
+        transition.animateFloat(
+            label = "imageAngle",
+            transitionSpec = { tween(2500, 4000, InterpolatorEasing(BounceInterpolator())) }) {
             if (it) 360f else 0f
         }
         val outlineColor = Color(186, 223, 220, 255)
