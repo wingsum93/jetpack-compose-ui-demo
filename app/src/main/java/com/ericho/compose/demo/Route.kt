@@ -33,4 +33,5 @@ object Route {
     const val HealthFruitDrinkDemo = "/HealthFruitDrinkDemo"
     const val CatListWithSwipe = "/CatListWithSwipe"
     const val AnimateGraphicLayerDemo = "/AnimateGraphicLayerDemo"
+    const val PieChatDemo = "/PieChatDemo"
 }

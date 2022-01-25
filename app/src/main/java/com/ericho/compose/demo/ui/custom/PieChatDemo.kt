@@ -32,14 +32,26 @@ fun PieChatDemo() {
         val transition = updateTransition(targetState = flowInProgress, "trans")
         val outlineAngle by
         transition.animateFloat(label = "outlineAngle", transitionSpec = {
-            tween(4000, 0, InterpolatorEasing(BounceInterpolator()))
+            val delay = if (targetState) {
+                0
+            } else {
+                2500
+            }
+            tween(4000, delay, InterpolatorEasing(BounceInterpolator()))
         }) {
             if (it) 360f else 0f
         }
         val pictureAngle by
         transition.animateFloat(
             label = "imageAngle",
-            transitionSpec = { tween(2500, 4000, InterpolatorEasing(BounceInterpolator())) }) {
+            transitionSpec = {
+                val delay = if (targetState) {
+                    4000
+                } else {
+                    0
+                }
+                tween(2500, delay, InterpolatorEasing(BounceInterpolator()))
+            }) {
             if (it) 360f else 0f
         }
         val outlineColor = Color(186, 223, 220, 255)
