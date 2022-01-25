@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 
 @Composable
 fun PieChatDemo() {
@@ -52,9 +53,10 @@ fun PieChatDemo() {
         transition.animateFloat(label = "pAngle", transitionSpec = { tween(3000, 5000) }) {
             if (it) 360f else 0f
         }
-
+        val outlineColor = Color(186, 223, 220, 255)
         BoardwayPieChart(
             Modifier
+                .size(300.dp, 300.dp)
                 .constrainAs(pieChart) {
                     linkTo(
                         parent.start,
@@ -68,7 +70,10 @@ fun PieChatDemo() {
                     )
                 },
             outlineProgressAngle = outlineAngle,
-            imageAngle = pictureAngle
+            imageAngle = pictureAngle,
+            strokeWidthDp = 200.dp,
+            circleOutlineColor = outlineColor,
+            separatorAngle = 3f
         )
 
         Button(

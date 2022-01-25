@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ericho.compose.demo.R
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
@@ -26,29 +27,29 @@ fun BoardwayPieChart(
     outlineProgressAngle: Float = 320f,
     // 0..360
     imageAngle: Float = 220f,
+    strokeWidthDp: Dp = 150.dp,
     separatorAngle: Float = 20f,
     circleOutlineColor: Color = Color(65, 236, 182, 255)
 ) {
     val outlineSafeAngle =
         remember(outlineProgressAngle) { outlineProgressAngle.coerceIn(0f..360f) }
     val imageSafeAngle = remember(imageAngle) { imageAngle.coerceIn(0f..360f) }
-    val separatorSafeAngle = remember(separatorAngle) { separatorAngle.coerceIn(10f..60f) }
+    val separatorSafeAngle = remember(separatorAngle) { separatorAngle.coerceIn(1f..60f) }
     //calculate sector of 3 arc
     val imageBitmap: ImageBitmap = ImageBitmap.imageResource(id = R.drawable.boardway_shape)
-
+    val strokeWidth = strokeWidthDp.value
     Canvas(
         modifier = modifier
             .aspectRatio(1f)
             .sizeIn(
-                minWidth = 300.dp,
-                minHeight = 300.dp,
-                maxHeight = 500.dp,
-                maxWidth = 500.dp
+                minWidth = 100.dp,
+                minHeight = 100.dp,
+                maxHeight = 400.dp,
+                maxWidth = 400.dp
             )
             .clip(CircleShape),
         onDraw = {
             //data part
-            val strokeWidth = 150.dp.value
             val angleOffset = -90f
             val angle1MidPoint = 0 + angleOffset
             val smallAngleOffset = separatorSafeAngle / 2
@@ -92,7 +93,8 @@ fun BoardwayPieChart(
                     drawImageArc(
                         startAngle = i * 120 + angle1MidPoint + smallAngleOffset,
                         sweepAngle = imageSweepAngle,
-                        style = Stroke(width = strokeWidth)
+                        style = Stroke(width = strokeWidth),
+                        color = circleOutlineColor
                     )
                 }
             }
