@@ -18,7 +18,6 @@ import com.ericho.compose.demo.R
 import com.ericho.compose.demo.ui.theme.JetpackComposeUiDemoTheme
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.sizeIn
-import kotlin.math.min
 
 @Composable
 fun BoardwayPieChart(
@@ -49,25 +48,16 @@ fun BoardwayPieChart(
             .clip(CircleShape),
         onDraw = {
             //data part
-            val width = this.size.width
-            val height = this.size.height
             val strokeWidth = 150.dp.value
-            val minLength = min(this.size.width - strokeWidth, size.height - strokeWidth)
-            val leftOffset = (width - minLength) / 2
-            val topOffset = (height - minLength) / 2
-//            val rect = RectF(leftOffset, topOffset, width - leftOffset, height - topOffset)
-
             val angleOffset = -90f
             val angle1MidPoint = 0 + angleOffset
-            val angle2MidPoint = 120 + angleOffset
-            val angle3MidPoint = 240 + angleOffset
             val smallAngleOffset = separatorSafeAngle / 2
 
             // draw picture painter
             val paint = Paint()
             paint.textAlign = Paint.Align.CENTER
             paint.textSize = 64f
-            paint.color = Color.Gray.toArgb()
+            paint.color = Color(0x94837878).toArgb()
             drawIntoCanvas {
                 it.nativeCanvas.drawText(
                     "member : Premium",
@@ -77,14 +67,15 @@ fun BoardwayPieChart(
                 )
             }
             for (i in 0..2) {
-                val outLineAngleTemp = outlineSafeAngle - 120 * i
-                val imageAngleTemp = imageSafeAngle - 120 * i
+                var outLineAngleTemp = outlineSafeAngle - 120 * i
+                var imageAngleTemp = imageSafeAngle - 120 * i
+                outLineAngleTemp -= smallAngleOffset
+                imageAngleTemp -= smallAngleOffset
                 val outLineIsInThisSector =
-                    outLineAngleTemp > 0 && outLineAngleTemp > smallAngleOffset
-                val imageIsInThisSector = imageAngleTemp > 0 && imageAngleTemp > smallAngleOffset
-                val outlineSweepAngle =
-                    min(120 - 2 * smallAngleOffset, outLineAngleTemp % 120)
-                val imageSweepAngle = min(120 - 2 * smallAngleOffset, imageAngleTemp % 120)
+                    outLineAngleTemp > 0
+                val imageIsInThisSector = imageAngleTemp > 0
+                val outlineSweepAngle = outLineAngleTemp.coerceIn(0f, 120 - 2 * smallAngleOffset)
+                val imageSweepAngle = imageAngleTemp.coerceIn(0f, 120 - 2 * smallAngleOffset)
                 if (outLineIsInThisSector) {
                     //draw color arc
                     drawArc(
@@ -95,7 +86,6 @@ fun BoardwayPieChart(
                         useCenter = false,
                         blendMode = BlendMode.SrcIn
                     )
-
                 }
                 if (imageIsInThisSector) {
                     //draw image arc
@@ -107,28 +97,7 @@ fun BoardwayPieChart(
                 }
             }
 
-            // for image arc
-//            drawImageArc(
-//                startAngle = angle1MidPoint + smallAngleOffset,
-//                sweepAngle = 120f - 2 * smallAngleOffset,
-//                style = Stroke(width = strokeWidth),
-//                color = circleOutlineColor
-//            )
-//            drawImageArc(
-//                startAngle = angle2MidPoint + smallAngleOffset,
-//                sweepAngle = 120f - 2 * smallAngleOffset,
-//                style = Stroke(width = strokeWidth),
-//                color = circleOutlineColor
-//            )
-//            drawImageArc(
-//                startAngle = angle3MidPoint + smallAngleOffset,
-//                sweepAngle = 120f - 2 * smallAngleOffset,
-//                style = Stroke(width = strokeWidth),
-//                color = circleOutlineColor
-//            )
-
             drawImage(imageBitmap, blendMode = BlendMode.DstAtop)
-
         }
     )
 }
@@ -149,14 +118,76 @@ private fun DrawScope.drawImageArc(
     )
 }
 
-private fun getSmallCircleRadius(componentWidth: Float): Float {
-    return componentWidth / 2 * 0.76.toFloat()
-}
-
 @Preview(showBackground = true)
 @Composable
 fun BoardwayPieChartPreview() {
     JetpackComposeUiDemoTheme {
         BoardwayPieChart()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_10() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 10f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_15() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 15f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_100() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 100f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_110() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 110f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_120() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 120f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_240() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 240f
+        )
     }
 }

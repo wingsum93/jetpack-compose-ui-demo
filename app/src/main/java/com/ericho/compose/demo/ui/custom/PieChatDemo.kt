@@ -18,10 +18,11 @@ import androidx.compose.foundation.layout.padding
 
 @Composable
 fun PieChatDemo() {
+    val backgroundColor = Color(0x6FD1CDCD)
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Gray)
+            .background(backgroundColor)
             .padding(10.dp)
     ) {
         val (pieChart, btn, txv1, txv2) = createRefs()
