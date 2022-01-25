@@ -1,7 +1,6 @@
 package com.ericho.compose.demo.ui.custom
 
 import android.graphics.Paint
-import android.graphics.RectF
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -25,13 +24,12 @@ import kotlin.math.min
 fun BoardwayPieChart(
     modifier: Modifier = Modifier,
     // 0..360
-    outlineProgressAngle: Float = 0f,
+    outlineProgressAngle: Float = 320f,
     // 0..360
-    imageAngle: Float = 0f,
+    imageAngle: Float = 220f,
     separatorAngle: Float = 20f,
     circleOutlineColor: Color = Color(65, 236, 182, 255)
 ) {
-
     val outlineSafeAngle =
         remember(outlineProgressAngle) { outlineProgressAngle.coerceIn(0f..360f) }
     val imageSafeAngle = remember(imageAngle) { imageAngle.coerceIn(0f..360f) }
@@ -57,7 +55,7 @@ fun BoardwayPieChart(
             val minLength = min(this.size.width - strokeWidth, size.height - strokeWidth)
             val leftOffset = (width - minLength) / 2
             val topOffset = (height - minLength) / 2
-            val rect = RectF(leftOffset, topOffset, width - leftOffset, height - topOffset)
+//            val rect = RectF(leftOffset, topOffset, width - leftOffset, height - topOffset)
 
             val angleOffset = -90f
             val angle1MidPoint = 0 + angleOffset
@@ -65,11 +63,6 @@ fun BoardwayPieChart(
             val angle3MidPoint = 240 + angleOffset
             val smallAngleOffset = separatorSafeAngle / 2
 
-            val maximiumSweepAngle = 360 / 3 - separatorSafeAngle
-            val aaa = outlineSafeAngle % 120
-
-
-            val bitmapComposeShader = 0
             // draw picture painter
             val paint = Paint()
             paint.textAlign = Paint.Align.CENTER
@@ -83,32 +76,56 @@ fun BoardwayPieChart(
                     paint
                 )
             }
+            for (i in 0..2) {
+                val outLineAngleTemp = outlineSafeAngle - 120 * i
+                val imageAngleTemp = imageSafeAngle - 120 * i
+                val outLineIsInThisSector =
+                    outLineAngleTemp > 0 && outLineAngleTemp > smallAngleOffset
+                val imageIsInThisSector = imageAngleTemp > 0 && imageAngleTemp > smallAngleOffset
+                val outlineSweepAngle =
+                    min(120 - 2 * smallAngleOffset, outLineAngleTemp % 120)
+                val imageSweepAngle = min(120 - 2 * smallAngleOffset, imageAngleTemp % 120)
+                if (outLineIsInThisSector) {
+                    //draw color arc
+                    drawArc(
+                        circleOutlineColor,
+                        startAngle = i * 120 + angle1MidPoint + smallAngleOffset,
+                        sweepAngle = outlineSweepAngle,
+                        style = Stroke(width = strokeWidth),
+                        useCenter = false,
+                        blendMode = BlendMode.SrcIn
+                    )
 
-            //for color arc
-            drawArc(
-                circleOutlineColor,
-                startAngle = angle3MidPoint + smallAngleOffset,
-                sweepAngle = 120f - 2 * smallAngleOffset,
-                style = Stroke(width = strokeWidth),
-                useCenter = false
-            )
+                }
+                if (imageIsInThisSector) {
+                    //draw image arc
+                    drawImageArc(
+                        startAngle = i * 120 + angle1MidPoint + smallAngleOffset,
+                        sweepAngle = imageSweepAngle,
+                        style = Stroke(width = strokeWidth)
+                    )
+                }
+            }
 
             // for image arc
-            drawImageArc(
-                startAngle = angle1MidPoint + smallAngleOffset,
-                sweepAngle = 120f - 2 * smallAngleOffset,
-                style = Stroke(width = strokeWidth)
-            )
-            drawImageArc(
-                startAngle = angle2MidPoint + smallAngleOffset,
-                sweepAngle = 120f - 2 * smallAngleOffset,
-                style = Stroke(width = strokeWidth)
-            )
-            drawImageArc(
-                startAngle = angle3MidPoint + smallAngleOffset,
-                sweepAngle = 120f - 2 * smallAngleOffset,
-                style = Stroke(width = strokeWidth)
-            )
+//            drawImageArc(
+//                startAngle = angle1MidPoint + smallAngleOffset,
+//                sweepAngle = 120f - 2 * smallAngleOffset,
+//                style = Stroke(width = strokeWidth),
+//                color = circleOutlineColor
+//            )
+//            drawImageArc(
+//                startAngle = angle2MidPoint + smallAngleOffset,
+//                sweepAngle = 120f - 2 * smallAngleOffset,
+//                style = Stroke(width = strokeWidth),
+//                color = circleOutlineColor
+//            )
+//            drawImageArc(
+//                startAngle = angle3MidPoint + smallAngleOffset,
+//                sweepAngle = 120f - 2 * smallAngleOffset,
+//                style = Stroke(width = strokeWidth),
+//                color = circleOutlineColor
+//            )
 
             drawImage(imageBitmap, blendMode = BlendMode.DstAtop)
 
@@ -119,10 +136,11 @@ fun BoardwayPieChart(
 private fun DrawScope.drawImageArc(
     startAngle: Float,
     sweepAngle: Float,
-    style: Stroke
+    style: Stroke,
+    color: Color = Color.Green
 ) {
     drawArc(
-        color = Color.Green,
+        color = color,
         startAngle = startAngle,
         sweepAngle = sweepAngle,
         useCenter = false,
