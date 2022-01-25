@@ -28,6 +28,7 @@ fun BoardwayPieChart(
     // 0..360
     imageAngle: Float = 220f,
     strokeWidthDp: Dp = 150.dp,
+    section: Int = 3,
     separatorAngle: Float = 20f,
     circleOutlineColor: Color = Color(65, 236, 182, 255)
 ) {
@@ -53,7 +54,8 @@ fun BoardwayPieChart(
             val angleOffset = -90f
             val angle1MidPoint = 0 + angleOffset
             val smallAngleOffset = separatorSafeAngle / 2
-
+            val sectionFullAngle = 360 / section
+            val sectionReducedAngle = sectionFullAngle - separatorSafeAngle
             // draw picture painter
             val paint = Paint()
             paint.textAlign = Paint.Align.CENTER
@@ -67,21 +69,20 @@ fun BoardwayPieChart(
                     paint
                 )
             }
-            for (i in 0..2) {
-                var outLineAngleTemp = outlineSafeAngle - 120 * i
-                var imageAngleTemp = imageSafeAngle - 120 * i
+            for (i in 0 until section) {
+                var outLineAngleTemp = outlineSafeAngle - sectionFullAngle * i
+                var imageAngleTemp = imageSafeAngle - sectionFullAngle * i
                 outLineAngleTemp -= smallAngleOffset
                 imageAngleTemp -= smallAngleOffset
-                val outLineIsInThisSector =
-                    outLineAngleTemp > 0
+                val outLineIsInThisSector = outLineAngleTemp > 0
                 val imageIsInThisSector = imageAngleTemp > 0
-                val outlineSweepAngle = outLineAngleTemp.coerceIn(0f, 120 - 2 * smallAngleOffset)
-                val imageSweepAngle = imageAngleTemp.coerceIn(0f, 120 - 2 * smallAngleOffset)
+                val outlineSweepAngle = outLineAngleTemp.coerceIn(0f, sectionReducedAngle)
+                val imageSweepAngle = imageAngleTemp.coerceIn(0f, sectionReducedAngle)
                 if (outLineIsInThisSector) {
                     //draw color arc
                     drawArc(
                         circleOutlineColor,
-                        startAngle = i * 120 + angle1MidPoint + smallAngleOffset,
+                        startAngle = i * sectionFullAngle + angle1MidPoint + smallAngleOffset,
                         sweepAngle = outlineSweepAngle,
                         style = Stroke(width = strokeWidth),
                         useCenter = false,
@@ -91,7 +92,7 @@ fun BoardwayPieChart(
                 if (imageIsInThisSector) {
                     //draw image arc
                     drawImageArc(
-                        startAngle = i * 120 + angle1MidPoint + smallAngleOffset,
+                        startAngle = i * sectionFullAngle + angle1MidPoint + smallAngleOffset,
                         sweepAngle = imageSweepAngle,
                         style = Stroke(width = strokeWidth),
                         color = circleOutlineColor
