@@ -191,6 +191,17 @@ fun BoardwayPieChartPreview_340_120() {
 
 @Preview(showBackground = true)
 @Composable
+fun BoardwayPieChartPreview_340_124() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 124f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 fun BoardwayPieChartPreview_340_240() {
     JetpackComposeUiDemoTheme {
         BoardwayPieChart(
