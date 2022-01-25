@@ -36,7 +36,8 @@ fun PieChatDemo() {
                     durationMillis = 5000
                     120f at 1000
                     240f at 3000
-                    360f at 5000
+                    360f at 4000
+                    330f at 4500
                 }
             } else {
                 keyframes {
