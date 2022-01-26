@@ -54,8 +54,8 @@ fun BoardwayTraditionPieChart(
 @Composable
 fun BoardwayTraditionPieChartPreview_1() {
     BoardwayTraditionPieChart(
-        backgroundProgress = .7f,
-        progress = .2f
+        backgroundProgress = .66f,
+        progress = .1f
     )
 }
 
@@ -63,7 +63,7 @@ fun BoardwayTraditionPieChartPreview_1() {
 @Composable
 fun BoardwayTraditionPieChartPreview_2() {
     BoardwayTraditionPieChart(
-        backgroundProgress = 1f,
-        progress = .2f
+        backgroundProgress = .667f,
+        progress = .33f
     )
 }

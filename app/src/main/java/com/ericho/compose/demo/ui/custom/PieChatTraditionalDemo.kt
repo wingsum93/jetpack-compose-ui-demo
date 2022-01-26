@@ -30,7 +30,7 @@ fun PieChatTraditionalDemo() {
             .background(backgroundColor)
             .padding(10.dp)
     ) {
-        val (pieChart, btn1, btn2, txv1, txv2) = createRefs()
+        val (pieChart, btn1, btn2, btn3, txv1, txv2) = createRefs()
         var flowInProgress by remember { mutableStateOf(0f) }
         val outlineColor = Color(186, 223, 220, 255)
         val imageBitmap: ImageBitmap = ImageBitmap.imageResource(id = R.drawable.boardway_shape)
@@ -57,6 +57,7 @@ fun PieChatTraditionalDemo() {
                         donutView.setDonutSection(3)
                         donutView.setDonutBackground(outlineColor.toArgb())
                         donutView.setDonutSectionSpaceAngle(5f)
+                        donutView.setDonutStrokeWidth(130f)
                         donutView.setDonutForeground(
                             imageBitmap.asAndroidBitmap().toDrawable(
                                 resource
@@ -71,24 +72,31 @@ fun PieChatTraditionalDemo() {
         )
 
         Button(
-            onClick = { flowInProgress = .5f },
+            onClick = { flowInProgress = .3f },
             modifier = Modifier.constrainAs(btn1) {
                 top.linkTo(pieChart.bottom)
                 bottom.linkTo(parent.bottom)
                 start.linkTo(parent.start)
-                end.linkTo(parent.end)
             }) {
-            Text(text = "Click to 180º")
+            Text(text = "Click to •3")
         }
         Button(
-            onClick = { flowInProgress = .7f },
+            onClick = { flowInProgress = .45f },
             modifier = Modifier.constrainAs(btn2) {
                 top.linkTo(pieChart.bottom)
                 bottom.linkTo(parent.bottom)
                 start.linkTo(btn1.end)
-                end.linkTo(parent.end)
             }) {
-            Text(text = "Click to 240º")
+            Text(text = "Click to •45")
+        }
+        Button(
+            onClick = { flowInProgress = .9f },
+            modifier = Modifier.constrainAs(btn3) {
+                top.linkTo(pieChart.bottom)
+                bottom.linkTo(parent.bottom)
+                start.linkTo(btn2.end)
+            }) {
+            Text(text = "Click to •9")
         }
         Text(text = "outlineAngle> ", Modifier.constrainAs(txv1) {
             bottom.linkTo(btn1.top)

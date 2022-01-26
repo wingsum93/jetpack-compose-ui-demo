@@ -13,6 +13,7 @@ import com.ericho.compose.demo.ui.ConstraintLayoutExamplePage
 import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.custom.ClickEventOverlayDemo
 import com.ericho.compose.demo.ui.custom.PieChatDemo
+import com.ericho.compose.demo.ui.custom.PieChatTraditionalDemo
 import com.ericho.compose.demo.ui.touch.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -158,6 +159,13 @@ val data2 = listOf(
         Tags.animation, Tags.ui
     ) {
         PieChatDemo()
+    },
+    PageObj.create(
+        "Bo Style PieChart (Value Animator)",
+        Route.PieChatTraditionalDemo,
+        Tags.animation, Tags.ui
+    ) {
+        PieChatTraditionalDemo()
     },
 )
 

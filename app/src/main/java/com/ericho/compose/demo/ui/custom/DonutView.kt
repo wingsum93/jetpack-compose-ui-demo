@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.animation.BounceInterpolator
+import android.view.animation.DecelerateInterpolator
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.toBitmap
 import kotlin.math.min
@@ -53,7 +54,7 @@ class DonutView @JvmOverloads constructor(
     private var backgroundAnimator: ValueAnimator? = null
     private var animatorSet: AnimatorSet? = null
     private var backgroundInterpolator = BounceInterpolator()
-    private var foregroundInterpolator = BounceInterpolator()
+    private var foregroundInterpolator = DecelerateInterpolator()
     private var donutBackgroundColor: Int = 0x7F000000
         set(value) {
             field = value

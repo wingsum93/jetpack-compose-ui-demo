@@ -34,4 +34,5 @@ object Route {
     const val CatListWithSwipe = "/CatListWithSwipe"
     const val AnimateGraphicLayerDemo = "/AnimateGraphicLayerDemo"
     const val PieChatDemo = "/PieChatDemo"
+    const val PieChatTraditionalDemo = "/PieChatTraditionalDemo"
 }
