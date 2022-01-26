@@ -5,14 +5,14 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Box
@@ -52,8 +52,7 @@ fun FluidSliderImpl(
     val BAR_INNER_HORIZONTAL_OFFSET = 0
     var position: Float by remember { mutableStateOf(0.5f) }
     val barHeight: Dp = if (size == Size.NORMAL) 20.dp else 15.dp
-    val SLIDER_WIDTH = 4
-    val SLIDER_HEIGHT = 1 + BAR_VERTICAL_OFFSET
+    val SLIDER_HEIGHT = 40f
 
     Box(
         modifier = modifier
@@ -70,11 +69,18 @@ fun FluidSliderImpl(
             val (canvasWidth, canvasHeight) = this.size
             var zeroPoint = Offset.Zero
             zeroPoint += Offset(10f, canvasHeight / 2)
-            canvasWidth
-            drawRoundRect(color = bar_color, topLeft = zeroPoint)
+            drawRoundRect(
+                color = bar_color, topLeft = zeroPoint,
+                size = androidx.compose.ui.geometry.Size(canvasWidth, SLIDER_HEIGHT),
+                cornerRadius = CornerRadius(
+                    50f, 50f
+                )
+            )
+            //draw blue outline blue circle
+//            drawCircle()
+            //draw inner small white circle
+
             //
-            val path = Path()
-            path.addArc(Rect(0f, 100f, 200f, 300f), 270f, 180f)
             drawIntoCanvas {
                 val paint = android.graphics.Paint()
                 paint.textAlign = Paint.Align.CENTER
@@ -130,4 +136,10 @@ enum class Size(val value: Int) {
      * Small size - 40dp.
      */
     SMALL(40)
+}
+
+@Preview
+@Composable
+fun FluidSliderPreview() {
+    FluidSlider()
 }
