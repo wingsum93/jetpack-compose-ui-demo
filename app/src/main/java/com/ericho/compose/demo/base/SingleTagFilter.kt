@@ -7,7 +7,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +27,7 @@ fun SingleTagFilter(
     onTagSelect: (String) -> Unit = {},
     onTagReset: () -> Unit = {}
 ) {
-    var selectedTag by remember { mutableStateOf<String?>(null) }
+    var selectedTag by rememberSaveable { mutableStateOf<String?>(null) }
     val innerTags = tags.toMutableList()
     innerTags.removeAll { it == selectedTag }
     if (selectedTag != null) innerTags.add(0, selectedTag!!)
