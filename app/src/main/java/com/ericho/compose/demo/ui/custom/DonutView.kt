@@ -1,11 +1,14 @@
 package com.ericho.compose.demo.ui.custom
 
+import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import android.view.animation.BounceInterpolator
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.toBitmap
 import kotlin.math.min
@@ -41,11 +44,16 @@ class DonutView @JvmOverloads constructor(
             backgroundPaint.strokeWidth = value
         }
     private var progress: Float = 1f
-    private var currentAnimationProgress: Float = 0f
+    private var currentAnimationProgress: Float = 0f // 0..1
+    var currentBackgroundAnimationProgress: Float = 0f // 0..1
     private var section: Int = 1
     private var sectionSpaceAngle: Float = 3f
 
     private var animator: ValueAnimator? = null
+    private var backgroundAnimator: ValueAnimator? = null
+    private var animatorSet: AnimatorSet? = null
+    private var backgroundInterpolator = BounceInterpolator()
+    private var foregroundInterpolator = BounceInterpolator()
     private var donutBackgroundColor: Int = 0x7F000000
         set(value) {
             field = value
@@ -59,17 +67,54 @@ class DonutView @JvmOverloads constructor(
 //    private var donutMaskDrawable: Drawable? = null // TODO: should have default value
 
     fun startAnimation() {
-        animator?.cancel()
-        ValueAnimator.ofFloat(0f, progress)
+        resetBackgroundAndProgress()
+        animatorSet?.cancel()
+
+        backgroundAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+            addUpdateListener {
+                currentBackgroundAnimationProgress = it.animatedValue as Float
+                invalidate()
+            }
+            duration = 1000
+            interpolator = backgroundInterpolator
+        }
+
+        animator = ValueAnimator.ofFloat(0f, progress)
             .apply {
                 addUpdateListener {
                     currentAnimationProgress = it.animatedValue as Float
                     invalidate()
                 }
                 duration = 1000
+                interpolator = foregroundInterpolator
             }
-            .also { animator = it }
-            .start()
+        animatorSet = AnimatorSet().apply {
+            play(animator).after(backgroundAnimator)
+            start()
+        }
+    }
+
+    private fun createForegroundValueAnimator(): ValueAnimator {
+        return ValueAnimator.ofFloat(0f, progress)
+            .apply {
+                addUpdateListener {
+                    currentAnimationProgress = it.animatedValue as Float
+                    invalidate()
+                }
+                duration = 1000
+                interpolator = foregroundInterpolator
+            }
+    }
+
+    fun startOnlyForegroundAnimation() {
+        animatorSet?.cancel()
+        resetBackgroundAndProgress()
+        //
+        animator = createForegroundValueAnimator()
+        animatorSet = AnimatorSet().apply {
+            play(animator)
+            start()
+        }
     }
 
     fun setProgress(progress: Float) {
@@ -108,10 +153,12 @@ class DonutView @JvmOverloads constructor(
             // Do nothing
         }
     }
-//
-//    fun setMask(drawable: Drawable) {
-//        donutMaskDrawable = drawable
-//    }
+
+    private fun resetBackgroundAndProgress() {
+        currentBackgroundAnimationProgress = 0f
+        currentAnimationProgress = 0f
+        invalidate()
+    }
 
     fun setDonutStrokeWidth(px: Float) {
         strokeWidth = px
@@ -129,8 +176,14 @@ class DonutView @JvmOverloads constructor(
             val startSectionProgress = i * eachSectionProgress
             val startPointOfSection = i * 360 / section - 90f
             val sectionAngle = (360 / section) - sectionSpaceAngle
-            canvas.drawArc(rect, startPointOfSection, sectionAngle, false, backgroundPaint)
-
+            val backgroundSectionAngle =
+                (currentBackgroundAnimationProgress * 360 - i * 360 / section).coerceIn(
+                    0f,
+                    (360 / section).toFloat()
+                )
+            val targetSweepAngle = backgroundSectionAngle / (360 / section) * sectionAngle
+            canvas.drawArc(rect, startPointOfSection, targetSweepAngle, false, backgroundPaint)
+            Log.i("eric1999", "onDraw: targetSweepAngle-> $targetSweepAngle")
             if (currentAnimationProgress > startSectionProgress) {
                 // should draw
                 val consumingSectionAngle =
