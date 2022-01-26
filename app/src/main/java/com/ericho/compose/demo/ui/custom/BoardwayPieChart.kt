@@ -180,11 +180,33 @@ fun BoardwayPieChartPreview_340_110() {
 
 @Preview(showBackground = true)
 @Composable
+fun BoardwayPieChartPreview_340_119() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 119f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 fun BoardwayPieChartPreview_340_120() {
     JetpackComposeUiDemoTheme {
         BoardwayPieChart(
             outlineProgressAngle = 340f,
             imageAngle = 120f
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoardwayPieChartPreview_340_121() {
+    JetpackComposeUiDemoTheme {
+        BoardwayPieChart(
+            outlineProgressAngle = 340f,
+            imageAngle = 121f
         )
     }
 }
