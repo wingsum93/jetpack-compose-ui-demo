@@ -3,15 +3,12 @@ package com.ericho.compose.demo.base
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,14 +20,14 @@ import androidx.compose.foundation.layout.padding
 
 @Composable
 fun SingleTagFilter(
-    tags: List<String>,
-    onTagSelect: (String) -> Unit = {},
-    onTagReset: () -> Unit = {}
+    tagState: SingleTagState = rememberSingleTagState()
 ) {
-    var selectedTag by rememberSaveable { mutableStateOf<String?>(null) }
+    val tags = tagState.tags
+    val selectedTag = tagState.selectedTag
+    val onTagSelect = tagState.onTagChange
     val innerTags = tags.toMutableList()
     innerTags.removeAll { it == selectedTag }
-    if (selectedTag != null) innerTags.add(0, selectedTag!!)
+    if (selectedTag != null) innerTags.add(0, selectedTag)
     Row(modifier = Modifier) {
         Text(
             text = "Filter by:",
@@ -42,8 +39,8 @@ fun SingleTagFilter(
             modifier = Modifier
                 .weight(1f)
         ) {
-            items(items = innerTags, itemContent = { tag ->
-                val isSelected = tag == selectedTag
+            itemsIndexed(items = innerTags, itemContent = { index, tag ->
+                val isSelected = index == tagState.selectedTagIndex
                 val colors =
                     if (isSelected) ButtonDefaults.textButtonColors(
                         backgroundColor = MaterialTheme.colors.primary,
@@ -56,7 +53,6 @@ fun SingleTagFilter(
                     border = BorderStroke(1.dp, MaterialTheme.colors.primary),
                     modifier = Modifier.padding(3.dp, 0.dp),
                     onClick = {
-                        selectedTag = tag
                         onTagSelect(tag)
                     }) {
                     Text(
@@ -68,8 +64,7 @@ fun SingleTagFilter(
         }
         if (selectedTag != null) {
             Button(onClick = {
-                onTagReset.invoke()
-                selectedTag = null
+                onTagSelect(null)
             }) {
                 Image(
                     imageVector = Icons.Default.Close, contentDescription = "",
@@ -81,9 +76,19 @@ fun SingleTagFilter(
 
 }
 
+@Composable
+fun rememberSingleTagState(
+    tagList: List<String> = listOf(),
+    onTagChange: (String?) -> Unit = {}
+): SingleTagState {
+    return remember(key1 = tagList) {
+        SingleTagState(tagList, onTagChange)
+    }
+}
+
 @Preview
 @Composable
 fun SingleTagFilterPreview() {
     val sampleTags = listOf("first tag", "second tag")
-    SingleTagFilter(sampleTags)
+    SingleTagFilter(rememberSingleTagState(tagList = sampleTags))
 }

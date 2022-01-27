@@ -1,5 +1,6 @@
 package com.ericho.compose.demo.ui
 
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -7,8 +8,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ericho.compose.demo.base.SingleTagFilter
 import com.ericho.compose.demo.base.StandardIconButton
+import com.ericho.compose.demo.base.rememberSingleTagState
 import com.ericho.compose.demo.model.data2
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,9 +35,11 @@ fun HomePageUi(
     // init data analyze
     val allTags = data2.flatMap { it.tags }
     val distinctTags = allTags.distinct().sorted()
-    var filterTag by rememberSaveable { mutableStateOf<String?>(null) }
-    val filteredList = remember(key1 = filterTag) {
-        if (filterTag == null) data2 else data2.filter { it.tags.contains(filterTag) }
+    var filteredList = data2
+    val tagState = rememberSingleTagState(distinctTags) { currentTag ->
+        Log.i("eric1999", "HomePageUi: ch-> currentTag $currentTag")
+        filteredList =
+            if (currentTag == null) data2 else data2.filter { it.tags.contains(currentTag!!) }
     }
     Scaffold(
         topBar = {
@@ -49,13 +52,9 @@ fun HomePageUi(
                 .padding(8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            SingleTagFilter(tags = distinctTags,
-                onTagSelect = {
-                    filterTag = it
-                },
-                onTagReset = {
-                    filterTag = null
-                })
+            SingleTagFilter(
+                tagState
+            )
             for (i in filteredList) {
                 StandardIconButton(text = i.title) {
                     navHostController.navigate(i.key)
