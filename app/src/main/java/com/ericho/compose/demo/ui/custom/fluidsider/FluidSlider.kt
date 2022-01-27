@@ -1,4 +1,4 @@
-package com.ericho.compose.demo.ui.custom
+package com.ericho.compose.demo.ui.custom.fluidsider
 
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas

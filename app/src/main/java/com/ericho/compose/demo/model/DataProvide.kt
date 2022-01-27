@@ -14,8 +14,8 @@ import com.ericho.compose.demo.ui.animation.*
 import com.ericho.compose.demo.ui.custom.ClickEventOverlayDemo
 import com.ericho.compose.demo.ui.custom.PieChatDemo
 import com.ericho.compose.demo.ui.custom.PieChatTraditionalDemo
-import com.ericho.compose.demo.ui.custom.FluidSliderDemo
-import com.ericho.compose.demo.ui.custom.FluidSliderNativeDemo
+import com.ericho.compose.demo.ui.custom.fluidsider.FluidSliderDemo
+import com.ericho.compose.demo.ui.custom.fluidsider.FluidSliderNativeDemo
 import com.ericho.compose.demo.ui.touch.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

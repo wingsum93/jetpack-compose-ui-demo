@@ -1,4 +1,4 @@
-package com.ericho.compose.demo.ui.custom
+package com.ericho.compose.demo.ui.custom.fluidsider
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
