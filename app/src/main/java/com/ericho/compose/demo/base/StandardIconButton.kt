@@ -7,7 +7,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +26,7 @@ fun StandardIconButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
-    val arrowColor = remember(text) {
+    val arrowColor = rememberSaveable(text, saver = ColorSaver()) {
         ColorUtil.getRandomColor()
     }
     Button(
@@ -46,6 +48,15 @@ fun StandardIconButton(
     }
 }
 
+class ColorSaver : Saver<Color, List<Float>> {
+    override fun restore(value: List<Float>): Color? {
+        return Color(value[0], value[1], value[2], value[3])
+    }
+
+    override fun SaverScope.save(value: Color): List<Float>? {
+        return listOf(value.red, value.green, value.blue, value.alpha)
+    }
+}
 
 @Composable
 @Preview
