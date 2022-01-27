@@ -81,8 +81,9 @@ fun rememberSingleTagState(
     tagList: List<String> = listOf(),
     onTagChange: (String?) -> Unit = {}
 ): SingleTagState {
-    return remember(key1 = tagList) {
-        SingleTagState(tagList, onTagChange)
+    val state = SingleTagState(tagList, onTagChange)
+    return remember(key1 = tagList, key2 = state) {
+        state
     }
 }
 
