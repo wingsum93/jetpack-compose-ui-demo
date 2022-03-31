@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -29,16 +28,15 @@ fun FloatingActionButton(
     elevation: FloatingActionButtonElevation = FloatingActionButtonDefaults.elevation(),
     content: @Composable BoxScope.() -> Unit
 ) {
+    rememberRipple()
     Surface(
+        onClick = onClick,
         modifier = modifier,
         shape = shape,
         color = backgroundColor,
         contentColor = contentColor,
         elevation = elevation.elevation(interactionSource).value,
-        onClick = onClick,
-        role = Role.Button,
-        interactionSource = interactionSource,
-        indication = rememberRipple()
+        interactionSource = interactionSource
     ) {
         CompositionLocalProvider(LocalContentAlpha provides contentColor.alpha) {
             ProvideTextStyle(MaterialTheme.typography.button) {
